@@ -74,8 +74,6 @@ export default function Home() {
       ],
     }));
 
-      //scroll to bottom
-      messageListRef.current?.scrollTo(-90, messageListRef.current.scrollHeight);
     setLoading(true);
     setQuery('');
 
@@ -134,7 +132,7 @@ export default function Home() {
   return (
     <>
       <Layout>
-        <div ref={messageListRef} className="overflow-y-auto scroll-smooth scroll-pe-6 scroll-pb-5 mb-[90px]">
+        <div ref={messageListRef} className="overflow-y-auto scroll-smooth scroll-pe-6 scroll-pb-5 ">
         {messages.map((message, index) => {
             let icon;
             let className;
@@ -214,7 +212,7 @@ export default function Home() {
             );
         })}
         </div>
-        <div id="input-center" className="flex justify-center align-center px-4 py-0 flex-row w-full fixed bottom-4">
+        <div id="input-center" className="flex justify-center align-center px-4 py-0 flex-row -order-1 my-[16px]">
         {error && (
             <div className="border border-red-400 rounded-md p-4">
             <p className="text-red-500">{error}</p>
