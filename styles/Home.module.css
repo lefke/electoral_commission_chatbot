@@ -1,9 +1,5 @@
 .main {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
+    color: #003057;
 }
 
 .header {
@@ -14,17 +10,11 @@
   text-align: center;
 }
 
-.cloudform {
-  position: relative;
-}
-
 .textarea {
-  position: relative;
   resize: none;
   font-size: 1.1rem;
   padding: 1rem 2rem 1rem 2rem;
-  width: 75vw;
-  border-radius: 0.5rem;
+  border-radius: 3rem;
   border: 1px solid #d9d9e3;
   background: #ffffff;
   color: #000;
@@ -45,23 +35,6 @@
   color: #6b7280;
 }
 
-.generatebutton {
-  position: absolute;
-  top: 0.87rem;
-  right: 1rem;
-  color: rgb(165, 162, 162);
-  background: none;
-  padding: 0.3rem;
-  border: none;
-  display: flex;
-}
-
-.loadingwheel {
-  position: absolute;
-  top: 0.2rem;
-  right: 0.25rem;
-}
-
 .svgicon {
   transform: rotate(90deg);
   width: 1.2em;
@@ -80,13 +53,6 @@
   background: none;
 }
 
-.messagelist {
-  width: 100%;
-  height: 100%;
-  overflow-y: scroll;
-  border-radius: 0.5rem;
-}
-
 .messagelistloading {
   display: flex;
   width: 100%;
@@ -97,7 +63,7 @@
 .usermessage {
   background: #ffffff;
   padding: 1.5rem;
-  color: #000;
+  color: #003057;
 }
 
 .usermessagewaiting {
@@ -121,9 +87,9 @@
 }
 
 .apimessage {
-  background: #f9fafb;
+  background: #F7F9FA;
   padding: 1.5rem;
-  color: #000;
+  color: #003057;
   animation: fadein 0.5s;
 }
 
@@ -151,8 +117,13 @@
 }
 
 .markdownanswer a {
-  color: #b13a3a;
-  font-weight: 500;
+    text-decoration: underline;
+}
+
+.markdownanswer img {
+    max-width: 260px;
+    width: 60%;
+    height: auto;
 }
 
 .markdownanswer code {
@@ -177,26 +148,6 @@
 .markdownanswer h2,
 .markdownanswer h3 {
   font-size: inherit;
-}
-
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  padding: 1rem 0;
-  flex-direction: column;
-}
-
-.cloud {
-  width: 75vw;
-  height: 65vh;
-  background: #ffffff;
-  border-radius: 0.5rem;
-  border: 1px solid #d9d9e3;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .pointsnormal {
@@ -229,34 +180,13 @@
 @media (max-width: 600px) {
   .main {
     padding: 1rem;
-    max-height: 90vh;
+    /*max-height: 90vh;*/
   }
 
-  .cloud {
-    width: 22rem;
-    height: 28rem;
-  }
-  .textarea {
-    width: 22rem;
-  }
-  .topnav {
-    border: 1px solid black;
-    align-items: center;
-    padding: 0.85rem 0.75rem 0.85rem 0.75rem;
-  }
 
-  .navlogo {
-    font-size: 1.25rem;
-    width: 20rem;
-  }
 
   .markdownanswer code {
     white-space: pre-wrap !important;
   }
 
-  .footer {
-    font-size: 0.7rem;
-    width: 100%;
-    text-align: center;
-  }
 }
