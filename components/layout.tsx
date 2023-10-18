@@ -14,7 +14,7 @@ export default function Layout({ children }: LayoutProps) {
         </header>
         <div className="hidden md:flex flex-auto basis-1/4 w-1/5 grow shrink">
             <div>
-                <h1>Here's a handy chatbot for when it's impossible to get through electoral guidance</h1>
+                <h1>Here&apos;s a handy chatbot for when it&apos;s impossible to get through electoral guidance</h1>
                 <img src="/robot-ai.png" max-width="200px" width="40%" alt="Girl in a jacket"/>
                 <h2>Ask the (unofficial) chat bot to do the searching for you</h2>
                 <p>Connected to The Electoral Commission electoral rules and regulations documents</p>
