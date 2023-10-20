@@ -31,10 +31,9 @@ export default function Home() {
         ![An anime meme where AI is asking if a butterfly is a pigeon](/ai-in-real-life.png)  
         Ask me a question!  
         Here are some suggestions:  
-        - How much money can I raise before I have to register?  
-        - Can I  
-        - When  
-        - What`,
+        - How much money can I spend before I have to register?  
+        - What are the spending limits for political parties?  
+        - Do I need to register if I'm a charity distributing leaflets during an election?`,
         type: 'apiMessage',
       },
     ],
@@ -110,6 +109,18 @@ export default function Home() {
       console.log('messageState', messageState);
 
       setLoading(false);
+
+      const appendResponse = await fetch('/api/appendQuestion', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ question }),
+      });
+      
+      if (!appendResponse.ok) {
+        console.error('Failed to append question to CSV');
+      }
 
       //scroll to bottom
       messageListRef.current?.scrollTo(-90, messageListRef.current.scrollHeight);
