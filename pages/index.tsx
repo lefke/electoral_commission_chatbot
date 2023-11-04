@@ -159,7 +159,7 @@ export default function Home() {
                 priority
                 />
             );
-            className = styles.apimessage;
+            className = "bg-white p-6 flex";
             } else {
             icon = (
                 <Image
@@ -176,7 +176,7 @@ export default function Home() {
             className =
                 loading && index === messages.length - 1
                 ? styles.usermessagewaiting
-                : styles.usermessage;
+                : "bg-white p-6 flex";
             }
             return (
             <>

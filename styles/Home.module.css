@@ -60,12 +60,6 @@
   margin-top: 1rem;
 }
 
-.usermessage {
-  background: #ffffff;
-  padding: 1.5rem;
-  color: #003057;
-}
-
 .usermessagewaiting {
   padding: 1.5rem;
   color: #000;
@@ -103,7 +97,6 @@
 }
 
 .apimessage,
-.usermessage,
 .usermessagewaiting {
   display: flex;
 }
