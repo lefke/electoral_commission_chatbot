@@ -4,13 +4,8 @@ export const Sidebar: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [showSidebar, setShowSidebar] = useState(false);
-  const sidebarRef = useRef<HTMLDivElement | null>(null);
 
   const handleSidebarToggle = () => {
-    if (sidebarRef.current) {
-      sidebarRef.current.style.display =
-        sidebarRef.current.style.display === 'block' ? 'none' : 'block';
-    }
     setShowSidebar(!showSidebar);
   };
 
@@ -49,9 +44,8 @@ export const Sidebar: React.FC<{ children: React.ReactNode }> = ({
 
       <div
         id="application-sidebar"
-        ref={sidebarRef}
         className={`fixed ${
-          showSidebar ? '' : 'hidden'
+          showSidebar ? '' : 'hidden lg:block'
         } top-0 start-0 bottom-0 z-[60] w-64 bg-white border-e border-gray-200 pt-7 pb-10 overflow-y-auto end-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 lg:block`}
       >
         <button
