@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const SidebarContent: React.FC = () => (
-  <div>
+  <div className="flex flex-col h-full justify-between">
     <h1>
       Here&apos;s a handy chatbot for when it&apos;s impossible to get through
       electoral guidance
