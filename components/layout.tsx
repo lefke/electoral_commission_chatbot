@@ -1,7 +1,5 @@
+import { Sidebar } from "lucide-react";
 import styles from '@/styles/Home.module.css';
-import { Header } from './Header';
-import { SidebarContent } from './SidebarContent';
-import { Sidebar } from './Sidebar';
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -9,19 +7,25 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div className=" bg-slate-200 text-blue">
-      <Header>
-        <div className="pt-3">The EC Doc (Unofficial) Chatbot Search</div>
-        <div className="text-xs pb-2">
-          Built by <a href="https://www.campaignlab.uk">Campaign Lab</a>
+    <div className="mx-auto flex flex-row h-screen bg-slate-200 w-screen text-blue">
+        <header className="fixed w-full text-center top-0 z-40 bg-white border-b border-b-slate-200 md:hidden">
+            <div className="pt-3">The EC Doc (Unofficial) Chatbot Search</div>
+            <div className="text-xs pb-2">Built by <a href="https://www.campaignlab.uk">Campaign Lab</a></div>
+        </header>
+        <div className="hidden md:flex flex-auto basis-1/4 w-1/5 grow shrink">
+            <div>
+                <h1>Here&apos;s a handy chatbot for when it&apos;s impossible to get through electoral guidance</h1>
+                <img src="/robot-ai.png" max-width="200px" width="40%" alt="Girl in a jacket"/>
+                <h2>Ask the (unofficial) chat bot to do the searching for you</h2>
+                <p>Connected to The Electoral Commission electoral rules and regulations documents</p>
+                <p>(last update: 02/10/2023)</p>
+                <p>Disclaimer: Do not take answers provided as legal advice, this is an experimental search tool. All data provided should be fact checked with The Electoral Commission tel: 0333 103 1928</p>
+                <p>Powered by LangChainAI. Built by Campaign Lab</p>
+            </div>
         </div>
-      </Header>
-      <Sidebar>
-        <SidebarContent />
-      </Sidebar>
-      <main className="w-full h-full pt-10 px-4 sm:px-6 md:px-8 lg:ps-72">
-        {children}
-      </main>
+        <main className="flex sm:w-full bg-white  basis-3/4 flex-auto flex-col-reverse overflow-hidden mt-0 pt-[46px] md:pt-0 pb-[0px] justify-items-end md:max-w-5xl ">
+            {children}
+        </main>
     </div>
   );
 }
