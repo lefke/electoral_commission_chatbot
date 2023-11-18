@@ -5,7 +5,11 @@ export default function LoadingModal() {
   let [isOpen, setIsOpen] = useState(true)
 
   function closeModal() {
-    setIsOpen(false)
+    
+  }
+
+  function closeModalButton() {
+    setIsOpen(false);
   }
 
   function openModal() {
@@ -67,9 +71,8 @@ export default function LoadingModal() {
                         </div>
                         <div className="text-sm leading-6">
                             <label htmlFor="candidates" className="font-medium text-gray-900">
-                            Candidates
+                            I understand the information provided is not legal advice and must be fact-checked
                             </label>
-                            <p className="text-gray-500">Get notified when a candidate applies for a job.</p>
                         </div>
                     </div>
                   </div>
@@ -78,7 +81,7 @@ export default function LoadingModal() {
                     <button
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
+                      onClick={closeModalButton}
                     >
                       I understand, thanks!
                     </button>
