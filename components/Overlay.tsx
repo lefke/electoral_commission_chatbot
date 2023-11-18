@@ -28,7 +28,7 @@ export default function LoadingModal() {
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child
             as={Fragment}
-            enter="ease-out duration-300"
+            enter="ease-out duration-200"
             enterFrom="opacity-0"
             enterTo="opacity-100"
             leave="ease-in duration-200"
@@ -54,13 +54,33 @@ export default function LoadingModal() {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    Payment successful
+                    When decoding electoral guidance feels a bit like:
                   </Dialog.Title>
                   <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      Your payment has been successfully submitted. We’ve sent
-                      you an email with all of the details of your order.
-                    </p>
+                    <div className="width:100%;height:0;padding-bottom:100%;position:relative;"><iframe src="https://giphy.com/embed/BZNGgpMF2Nnx8nEO6q" width="100%" height="100%" className="position:absolute giphy-embed" allowFullScreen></iframe></div>
+                    <h2>Ask the (unofficial) chat bot to do the searching for you</h2>
+                    <h3 className="pt-3 text-gray-500">Disclaimer</h3>
+                    <ul className="pb-3 text-sm text-gray-500 list-disc">
+                      <li>The answers provided are not legal advice</li>
+                      <li>This is an experimental search tool</li>
+                      <li>All data provided should be fact checked with The Electoral Commission tel: 0333 103 1928</li>
+                    </ul>
+                    <div className="relative flex gap-x-3">
+                        <div className="flex h-6 items-center">
+                            <input
+                            id="candidates"
+                            name="candidates"
+                            type="checkbox"
+                            className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                            />
+                        </div>
+                        <div className="text-sm leading-6">
+                            <label htmlFor="candidates" className="font-medium text-gray-900">
+                            Candidates
+                            </label>
+                            <p className="text-gray-500">Get notified when a candidate applies for a job.</p>
+                        </div>
+                    </div>
                   </div>
 
                   <div className="mt-4">
@@ -69,7 +89,7 @@ export default function LoadingModal() {
                       className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={closeModal}
                     >
-                      Got it, thanks!
+                      I understand, thanks!
                     </button>
                   </div>
                 </Dialog.Panel>
