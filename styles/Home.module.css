@@ -1,14 +1,3 @@
-.main {
-    color: #003057;
-}
-
-.header {
-  width: auto;
-}
-
-.header p {
-  text-align: center;
-}
 
 .textarea {
   resize: none;
@@ -81,9 +70,6 @@
 }
 
 .apimessage {
-  background: #F7F9FA;
-  padding: 1.5rem;
-  color: #003057;
   animation: fadein 0.5s;
 }
 

@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect } from 'react';
-import Layout from '@/components/layout';
 import styles from '@/styles/Home.module.css';
 import { Message } from '@/types/chat';
 import Image from 'next/image';
@@ -12,6 +11,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import Layout from '@/components/layout';
 
 export default function Home() {
   const [query, setQuery] = useState<string>('');
@@ -27,7 +27,7 @@ export default function Home() {
       {
         message: `Hi!  
         **I search** The Electoral Commission documents so you don’t have to  
-        Please remember the answers I provide are not legal advice, I am an experimental search tool. All data provided should be fact checked with The [Electoral Commission](https://www.electoralcommission.org.uk) tel: 0333 103 1928?
+        Please remember the answers I provide are not legal advice, I am an experimental search tool. All data provided should be fact checked with The [Electoral Commission](https://www.electoralcommission.org.uk) tel: 0333 103 1928
         ![An anime meme where AI is asking if a butterfly is a pigeon](/ai-in-real-life.png)  
         Ask me a question!  
         Here are some suggestions:  
@@ -159,7 +159,7 @@ export default function Home() {
                 priority
                 />
             );
-            className = "bg-white p-6 flex";
+            className = "bg-ec_blue_03 p-6 flex";
             } else {
             icon = (
                 <Image
