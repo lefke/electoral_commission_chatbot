@@ -25,7 +25,7 @@ export default function Home() {
   }>({
     messages: [
       {
-        message: `Hi! I search The Electoral Commission documents so you don’t have to`,
+        message: `Hi! I'm the (unofficial) Electoral Commission chatbot, I search guidance documents so you don’t have to`,
         type: 'apiMessage',
       },
       {
