@@ -25,12 +25,16 @@ export default function Home() {
   }>({
     messages: [
       {
-        message: `Hi!  
-        **I search** The Electoral Commission documents so you don’t have to  
-        Please remember the answers I provide are not legal advice, I am an experimental search tool. All data provided should be fact checked with The [Electoral Commission](https://www.electoralcommission.org.uk) tel: 0333 103 1928
-        ![An anime meme where AI is asking if a butterfly is a pigeon](/ai-in-real-life.png)  
-        Ask me a question!  
-        Here are some suggestions:  
+        message: `Hi! I search The Electoral Commission documents so you don’t have to`,
+        type: 'apiMessage',
+      },
+      {
+        message: `Remember the answers I provide are not legal advice **I am an experimental search tool**. All data provided should be fact checked with The [Electoral Commission](https://www.electoralcommission.org.uk) tel: 0333 103 1928  
+        ![An anime meme where AI is asking if a butterfly is a pigeon](/ai-in-real-life.png)`,
+        type: 'apiMessage',
+      },
+      {
+        message: `Ask me a question! Here are some suggestions:  
         - How much money can I spend before I have to register?  
         - What are the spending limits for political parties?  
         - Do I need to register if I'm a charity distributing leaflets during an election?`,
