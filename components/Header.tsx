@@ -5,7 +5,7 @@ export const Header: React.FC<{ children: React.ReactNode }> = ({
 }) => {
 
   return (
-    <header className="flex flex-row top-0 z-40 bg-white border-b border-b-slate-200">
+    <header className="flex flex-row top-0 bg-white border-b border-b-slate-200">
         <div className='flex flex-col px-6'>
             {children}
         </div>

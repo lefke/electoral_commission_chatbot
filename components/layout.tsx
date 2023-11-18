@@ -1,6 +1,7 @@
 import { Header } from './Header';
 import { SidebarContent } from './SidebarContent';
 import { Sidebar } from './Sidebar';
+import LoadingModal from '@/components/Overlay';
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -21,6 +22,7 @@ export default function Layout({ children }: LayoutProps) {
                 {children}
             </main>
         </div>
+    <LoadingModal/>
     </div>
   );
 }
