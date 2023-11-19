@@ -5,6 +5,10 @@ import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import LoadingDots from '@/components/ui/LoadingDots';
 import { Document } from 'langchain/document';
+import { 
+    UserCircleIcon,
+    ChatBubbleLeftEllipsisIcon,
+} from '@heroicons/react/24/solid'
 import {
   Accordion,
   AccordionContent,
@@ -153,28 +157,12 @@ export default function Home() {
             let className;
             if (message.type === 'apiMessage') {
             icon = (
-                <Image
-                key={index}
-                src="/boticon@2x.png"
-                alt="AI"
-                width="26"
-                height="26"
-                className={styles.boticon}
-                priority
-                />
+                <ChatBubbleLeftEllipsisIcon className="shrink-0 h-[24px] w-[24px] text-ec_blue mr-3" />
             );
-            className = "bg-ec_blue_03 p-6 flex";
+            className = "bg-ec_blue_03 p-6 flex  border-b border-b-slate-200";
             } else {
             icon = (
-                <Image
-                key={index}
-                src="/usericon@2x.png"
-                alt="Me"
-                width="26"
-                height="26"
-                className={styles.usericon}
-                priority
-                />
+                <UserCircleIcon className="shrink-0 h-[24px] w-[24px] text-slate-800 mr-3" />
             );
             // The latest message sent by the user will be animated while waiting for a response
             className =
@@ -184,7 +172,7 @@ export default function Home() {
             }
             return (
             <>
-                <div key={`chatMessage-${index}`} className={className}>
+                <div key={`chatMessage-${index}`} className={className + " border-b border-b-slate-200"}>
                 {icon}
                 <div className={styles.markdownanswer + " "}>
                     <ReactMarkdown linkTarget="_blank">
