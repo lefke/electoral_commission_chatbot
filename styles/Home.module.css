@@ -110,6 +110,7 @@
 .markdownanswer ol,
 .markdownanswer ul {
   margin: 1rem;
+  list-style: disc;
 }
 
 .markdownanswer h1,

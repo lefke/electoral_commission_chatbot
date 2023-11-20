@@ -55,11 +55,10 @@ export default function LoadingModal() {
                     <div className="px-6 pb-3 width:100%;height:0;padding-bottom:100%;position:relative;"><iframe src="https://giphy.com/embed/BZNGgpMF2Nnx8nEO6q" width="100%" height="100%" className="position:absolute giphy-embed" allowFullScreen></iframe></div>
                     <h2 className='px-6 pb-3'>Ask the (unofficial) chat bot to do the searching for you</h2>
                     <div className='bg-white p-6 pb-3'>
-                        <h3 className=" text-gray-500">Disclaimer</h3>
+                        <h3 className=" text-gray-500">Disclaimers</h3>
                         <ul className="pb-3 text-sm text-gray-500 list-disc list-inside">
                         <li>The answers provided are not legal advice</li>
-                        <li>This is an experimental search tool</li>
-                        <li className=''>Seaching document versions from 02/10/2023</li>
+                        <li className=''>Seaching Electoral Commission document versions from 02/10/2023</li>
                         <li>All data provided should be fact checked with The Electoral Commission tel: 0333 103 1928</li>
                         </ul>
                         <div className="relative flex gap-x-3">
@@ -73,7 +72,7 @@ export default function LoadingModal() {
                             </div>
                             <div className="text-sm leading-6">
                                 <label htmlFor="candidates" className="font-medium text-gray-900">
-                                I have read the disclaimer
+                                I have read and acknowledge the disclaimers
                                 </label>
                             </div>
                         </div>
