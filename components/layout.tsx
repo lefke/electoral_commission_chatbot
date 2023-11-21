@@ -19,7 +19,7 @@ export default function Layout({ children }: LayoutProps) {
       <Sidebar>
         <SidebarContent />
       </Sidebar>
-      <main className="w-full h-[90vh] lg:h-[95vh] flex sm:w-full bg-white flex-auto flex-col-reverse mt-0 p-0 justify-items-end lg:ps-64">
+      <main className="w-full h-[85vh] lg:h-[92vh] overflow-hidden flex sm:w-full bg-white flex-auto flex-col-reverse mt-0 p-0 justify-items-end lg:ps-64">
         {children}
       </main>
       <LoadingModal />
