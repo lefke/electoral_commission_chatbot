@@ -3,21 +3,12 @@ import { Fragment, useState } from 'react';
 import { Disclaimers } from './ui/Disclaimers';
 
 export default function LoadingModal() {
-  let [isOpen, setIsOpen] = useState(true);
-
-  function closeModal() {}
-
-  function closeModalButton() {
-    setIsOpen(false);
-  }
-
-  function openModal() {
-    setIsOpen(true);
-  }
+  const [isOpen, setIsOpen] = useState(true);
+  const [disclaimersRead, setDisclaimersRead] = useState(false);
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={closeModal}>
+      <Dialog as="div" className="relative z-10" onClose={() => {}}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-200"
@@ -71,6 +62,7 @@ export default function LoadingModal() {
                           name="candidates"
                           type="checkbox"
                           className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                          onClick={() => setDisclaimersRead(!disclaimersRead)}
                         />
                       </div>
                       <div className="text-sm leading-6">
@@ -86,13 +78,20 @@ export default function LoadingModal() {
                 </div>
 
                 <div className="text-center bg-white p-6 pt-3">
-                  <button
-                    type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    onClick={closeModalButton}
-                  >
-                    Get started!
-                  </button>
+                  {disclaimersRead ? (
+                    <button
+                      type="button"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      onClick={() => setIsOpen(false)}
+                      disabled={!disclaimersRead}
+                    >
+                      Get started!
+                    </button>
+                  ) : (
+                    <span className="italic text-sm">
+                      Please acknowledge disclaimers to get started
+                    </span>
+                  )}
                 </div>
               </Dialog.Panel>
             </Transition.Child>
