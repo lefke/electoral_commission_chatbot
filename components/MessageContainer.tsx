@@ -82,7 +82,7 @@ export const MessageContainer: React.FC<{
           </div>
         );
       })}
-      <div ref={messagesEndRef} className="h-0" />
+      <div ref={messagesEndRef} className="h-4" />
     </div>
   );
 };
