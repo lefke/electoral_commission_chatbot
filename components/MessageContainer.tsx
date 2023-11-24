@@ -36,7 +36,7 @@ export const MessageContainer: React.FC<{
             message={message}
             loading={loading && index === messages.length - 1}
           />
-          {message.sourceDocs && (
+          {message.sourceDocs && message.sourceDocs.length > 0 && (
             <SourceAccordion sourceDocs={message.sourceDocs} msgIdx={index} />
           )}
         </div>
