@@ -1,7 +1,7 @@
-import styles from '@/styles/Home.module.css';
+import LoadingModal from '@/components/Overlay';
 import { Header } from './Header';
-import { SidebarContent } from './SidebarContent';
 import { Sidebar } from './Sidebar';
+import { SidebarContent } from './SidebarContent';
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -9,7 +9,7 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div className=" bg-slate-200 text-blue">
+    <div className="bg-slate-200 text-blue">
       <Header>
         <div className="pt-3">The EC Doc (Unofficial) Chatbot Search</div>
         <div className="text-xs pb-2">
@@ -19,9 +19,10 @@ export default function Layout({ children }: LayoutProps) {
       <Sidebar>
         <SidebarContent />
       </Sidebar>
-      <main className="w-full h-full pt-10 px-4 sm:px-6 md:px-8 lg:ps-72">
+      <main className="w-full h-[85vh] lg:h-[92vh] overflow-hidden flex sm:w-full bg-white flex-auto flex-col-reverse mt-0 p-0 justify-items-end lg:ps-64">
         {children}
       </main>
+      <LoadingModal />
     </div>
   );
 }
