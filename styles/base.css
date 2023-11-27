@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.container {
+  @apply w-full max-w-[60rem] mx-auto;
+}
+
 /* ===== Start Toast styles ===== */
 .ToastViewport {
   --viewport-padding: 1rem;
