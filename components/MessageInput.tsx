@@ -119,7 +119,7 @@ export const MessageInput: React.FC<{
   return (
     <div
       id="input-center"
-      className="flex justify-center align-center px-4 py-0 flex-col -order-1 mt-3 mb-2"
+      className="flex justify-center container align-center px-4 py-0 flex-col -order-1 mt-3 mb-2"
     >
       {error && (
         <div className="border border-red-400 rounded-md p-4 mb-4">
