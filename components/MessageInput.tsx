@@ -8,6 +8,7 @@ import React, {
 import { MessageState } from '@/types/chat';
 import styles from '@/styles/Home.module.css';
 import LoadingDots from './ui/LoadingDots';
+import { ToastMessage } from './ui/ToastMessage';
 
 export const MessageInput: React.FC<{
   loading: boolean;
@@ -19,6 +20,10 @@ export const MessageInput: React.FC<{
   const [error, setError] = useState<string | null>(null);
 
   const { history } = messageState;
+
+  useEffect(() => {
+    setTimeout(() => error && setError(null), 2500);
+  }, [error]);
 
   //handle form submission
   async function handleSubmit(e: any) {
@@ -59,7 +64,6 @@ export const MessageInput: React.FC<{
         }),
       });
       const data = await response.json();
-      console.log('data', data);
 
       if (data.error) {
         setError(data.error);
@@ -77,7 +81,6 @@ export const MessageInput: React.FC<{
           history: [...state.history, [question, data.text]],
         }));
       }
-      console.log('messageState', messageState);
 
       setLoading(false);
 
@@ -95,7 +98,6 @@ export const MessageInput: React.FC<{
     } catch (error) {
       setLoading(false);
       setError('An error occurred while fetching the data. Please try again.');
-      console.log('error', error);
     }
   }
 
@@ -120,9 +122,12 @@ export const MessageInput: React.FC<{
       className="container flex justify-center align-center px-4 py-0 flex-row -order-1 my-[16px]"
     >
       {error && (
-        <div className="border border-red-400 rounded-md p-4">
-          <p className="text-red-500">{error}</p>
-        </div>
+        <ToastMessage
+          message={error ?? ''}
+          type={'error'}
+          open={error !== null}
+          setOpen={() => setError(null)}
+        />
       )}
       <div className={styles.cloudform + ' relative w-full'}>
         <form onSubmit={handleSubmit} className="relative w-full">
