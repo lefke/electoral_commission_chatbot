@@ -117,7 +117,7 @@ export const MessageInput: React.FC<{
   return (
     <div
       id="input-center"
-      className="flex justify-center align-center px-4 py-0 flex-row -order-1 my-[16px]"
+      className="container flex justify-center align-center px-4 py-0 flex-row -order-1 my-[16px]"
     >
       {error && (
         <div className="border border-red-400 rounded-md p-4">
@@ -165,6 +165,10 @@ export const MessageInput: React.FC<{
             )}
           </button>
         </form>
+        <div className="w-full text-center text-xs italic text-gray-400 font-light">
+          I am an AI powered search tool, all data provided should be fact
+          checked
+        </div>
       </div>
     </div>
   );
