@@ -1,5 +1,4 @@
 import LoadingModal from '@/components/Overlay';
-import { Header } from './Header';
 import { Sidebar } from './Sidebar';
 import { SidebarContent } from './SidebarContent';
 
@@ -9,17 +8,11 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div className="bg-slate-200 text-blue">
-      <Header>
-        <div className="pt-3">The EC Doc (Unofficial) Chatbot Search</div>
-        <div className="text-xs pb-2">
-          Built by <a href="https://www.campaignlab.uk">Campaign Lab</a>
-        </div>
-      </Header>
+    <div className="bg-slate-200 text-ec-blue-900 h-screen flex flex-col">
       <Sidebar>
         <SidebarContent />
       </Sidebar>
-      <main className="w-full h-[85vh] lg:h-[92vh] overflow-hidden flex sm:w-full bg-white flex-auto flex-col-reverse mt-0 p-0 justify-items-end lg:ps-64">
+      <main className="w-full overflow-hidden flex sm:w-full bg-white flex-auto flex-col-reverse mt-0 p-0 justify-items-end lg:ps-64">
         {children}
       </main>
       <LoadingModal />
