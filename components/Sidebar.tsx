@@ -25,8 +25,8 @@ export const Sidebar: React.FC<{ children: React.ReactNode }> = ({
       <div
         id="application-sidebar"
         className={`fixed ${
-          showSidebar ? '' : 'hidden lg:block'
-        } top-0 start-0 bottom-0 lg:z-0 z-[60] w-64 bg-ec-blue-900 text-white border-e border-gray-200 pt-7 pb-10 overflow-y-auto end-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 lg:block`}
+          showSidebar ? '' : 'w-0 lg:w-64'
+        } transition-[width] top-0 start-0 bottom-0 lg:z-0 z-[60] w-64 bg-ec-blue-900 text-white border-e border-gray-200 pt-7 pb-10 overflow-y-auto end-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 lg:block`}
       >
         <button
           onClick={handleSidebarToggle}
