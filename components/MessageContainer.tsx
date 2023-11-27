@@ -29,7 +29,7 @@ export const MessageContainer: React.FC<{
   );
 
   return (
-    <div className="overflow-y-auto scroll-smooth scroll-pe-6 scroll-pb-5 ">
+    <div className="overflow-y-auto scroll-smooth scroll-pe-6 scroll-pb-5">
       {messages.map((message, index) => (
         <div key={`chatMessage-${index}`}>
           <MessageLine
@@ -50,21 +50,23 @@ const MessageLine: React.FC<{
   message: Message;
   loading: boolean;
 }> = ({ message, loading }) => {
-  const apiMsgClass = 'bg-ec-blue-50 p-6 flex border-b border-b-slate-200';
+  const apiMsgClass = 'bg-ec-blue-50 p-6 flex';
   const userMsgClass = loading
     ? styles.usermessagewaiting + ' flex'
     : 'bg-white p-6 flex';
 
   const className = message.type === 'apiMessage' ? apiMsgClass : userMsgClass;
   return (
-    <div className={`${className} border-b border-b-slate-200`}>
-      {message.type === 'apiMessage' ? (
-        <ChatBubbleLeftEllipsisIcon className="shrink-0 h-[24px] w-[24px] text-ec-blue-900 mr-3" />
-      ) : (
-        <UserCircleIcon className="shrink-0 h-[24px] w-[24px] text-slate-800 mr-3" />
-      )}
-      <div className={styles.markdownanswer + ' '}>
-        <ReactMarkdown linkTarget="_blank">{message.message}</ReactMarkdown>
+    <div className={`border-b border-b-slate-200`}>
+      <div className={`${className} container`}>
+        {message.type === 'apiMessage' ? (
+          <ChatBubbleLeftEllipsisIcon className="shrink-0 h-[24px] w-[24px] text-ec-blue-900 mr-3" />
+        ) : (
+          <UserCircleIcon className="shrink-0 h-[24px] w-[24px] text-slate-800 mr-3" />
+        )}
+        <div className={styles.markdownanswer + ''}>
+          <ReactMarkdown linkTarget="_blank">{message.message}</ReactMarkdown>
+        </div>
       </div>
     </div>
   );
@@ -81,11 +83,11 @@ const SourceAccordion: React.FC<{
         collapsible
         className="bg-ec-grey-50 flex flex-col"
       >
-        <AccordionItem value={`item-${msgIdx}`}>
-          <AccordionTrigger className="mx-8">
+        <AccordionItem className="" value={`item-${msgIdx}`}>
+          <AccordionTrigger className="container">
             <h3>Source</h3>
           </AccordionTrigger>
-          <AccordionContent className="mx-10">
+          <AccordionContent className="container">
             <ul className="list-disc">
               {sourceDocs.map((doc, index) => (
                 <li key={`src-${index}`} className="flex flex-col mb-6">
@@ -98,10 +100,6 @@ const SourceAccordion: React.FC<{
                 </li>
               ))}
             </ul>
-            <div className="w-full text-center text-xs italic text-gray-400 font-light">
-              I am an AI powered search tool, all data provided should be fact
-              checked
-            </div>
           </AccordionContent>
         </AccordionItem>
       </Accordion>

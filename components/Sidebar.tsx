@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import {
-  Bars3Icon,
-} from '@heroicons/react/24/solid';
+import { Bars3Icon } from '@heroicons/react/24/solid';
+import { Title } from './SidebarContent';
 
 export const Sidebar: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -13,14 +12,9 @@ export const Sidebar: React.FC<{ children: React.ReactNode }> = ({
   };
   return (
     <>
-      <div className="sticky top-0 lg:ps-64  border-y px-4 sm:px-6 md:px-8 flex">
+      <div className="lg:hidden border-y px-4 sm:px-6 md:px-8 flex justify-between">
+        <Title />
         <SidebarToggle onToggle={handleSidebarToggle} />
-        <div className='flex flex-col pl-3'>
-            <div className="pt-3">The EC Doc (Unofficial) Chatbot Search</div>
-            <div className="text-xs pb-2">
-            A <a href="https://www.campaignlab.uk">Campaign Lab</a> project
-            </div>
-        </div>
       </div>
       <div
         id="application-sidebar"
@@ -28,12 +22,6 @@ export const Sidebar: React.FC<{ children: React.ReactNode }> = ({
           showSidebar ? '' : 'w-0 lg:w-64'
         } transition-[width] top-0 start-0 bottom-0 lg:z-0 z-[60] w-64 bg-ec-blue-900 text-white border-e border-gray-200 pt-7 pb-10 overflow-y-auto end-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 lg:block`}
       >
-        <button
-          onClick={handleSidebarToggle}
-          className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 lg:hidden"
-        >
-          ✕
-        </button>
         <div className="px-6 h-full">{children}</div>
       </div>
     </>
