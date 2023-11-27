@@ -119,15 +119,12 @@ export const MessageInput: React.FC<{
   return (
     <div
       id="input-center"
-      className="container flex justify-center align-center px-4 py-0 flex-row -order-1 my-[16px]"
+      className="flex justify-center align-center px-4 py-0 flex-col -order-1 mt-3 mb-2"
     >
       {error && (
-        <ToastMessage
-          message={error ?? ''}
-          type={'error'}
-          open={error !== null}
-          setOpen={() => setError(null)}
-        />
+        <div className="border border-red-400 rounded-md p-4 mb-4">
+          <p className="text-red-500">{error}</p>
+        </div>
       )}
       <div className={styles.cloudform + ' relative w-full'}>
         <form onSubmit={handleSubmit} className="relative w-full">

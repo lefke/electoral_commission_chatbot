@@ -1,12 +1,10 @@
 
 .textarea {
   resize: none;
-  font-size: 1.1rem;
-  padding: 1rem 2rem 1rem 2rem;
+  padding: 1rem 2.2rem 1rem 2rem;
   border-radius: 3rem;
   border: 1px solid #d9d9e3;
   background: #ffffff;
-  color: #000;
   outline: none;
 }
 
@@ -82,11 +80,6 @@
   }
 }
 
-.apimessage,
-.usermessagewaiting {
-  display: flex;
-}
-
 .markdownanswer a:hover {
   opacity: 0.8;
 }
@@ -117,45 +110,4 @@
 .markdownanswer h2,
 .markdownanswer h3 {
   font-size: inherit;
-}
-
-.pointsnormal {
-  width: 90%;
-  height: 90%;
-}
-
-.pointsdim {
-  width: 90%;
-  height: 90%;
-  opacity: 0.25;
-}
-
-.footer {
-  color: #5f6368;
-  font-size: 0.8rem;
-  margin: 1.5rem;
-}
-
-.footer a {
-  font-weight: 500;
-  color: #7a7d81;
-}
-
-.footer a:hover {
-  opacity: 0.8;
-}
-
-/* Mobile optimization */
-@media (max-width: 600px) {
-  .main {
-    padding: 1rem;
-    /*max-height: 90vh;*/
-  }
-
-
-
-  .markdownanswer code {
-    white-space: pre-wrap !important;
-  }
-
 }
