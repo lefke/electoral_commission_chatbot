@@ -7,10 +7,12 @@ module.exports = {
   ],
   theme: {
     extend: {
-        colors: {
-        'ec_blue': '#003057',
-        'ec_blue_03': '#F7F9FA',
-        },
+      colors: {
+        'ec-blue-900': '#003057',
+        'ec-grey-50': '#F7F9FA',
+        'ec-grey-100': '#d1e4ed',
+        'ec-grey-200': '#c1d4de',
+      },
     },
   },
 };
