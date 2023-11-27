@@ -40,14 +40,13 @@ export default function LoadingModal() {
                   When decoding electoral guidance feels a bit like:
                 </Dialog.Title>
                 <div className="mt-2">
-                  <div className="px-6 pb-3 width:100%;height:0;padding-bottom:100%;position:relative;">
-                    <iframe
-                      src="https://giphy.com/embed/BZNGgpMF2Nnx8nEO6q"
+                  <div className="px-6 pb-3 w-56 mx-auto">
+                    <img 
+                      src="/work-working.gif"
+                      max-width="200px" 
                       width="100%"
                       height="100%"
-                      className="position:absolute giphy-embed"
-                      allowFullScreen
-                    ></iframe>
+                    />
                   </div>
                   <h2 className="px-6 pb-3">
                     Ask the (unofficial) chat bot to do the searching for you
