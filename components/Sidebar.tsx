@@ -10,14 +10,14 @@ export const Sidebar: React.FC<{ children: React.ReactNode }> = ({
   };
   return (
     <>
-      <div className="sticky top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden">
+      <div className="sticky top-0 inset-x-0 bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden">
         <SidebarToggle onToggle={handleSidebarToggle} />
       </div>
       <div
         id="application-sidebar"
         className={`fixed ${
           showSidebar ? '' : 'hidden lg:block'
-        } top-0 start-0 bottom-0 z-[60] w-64 bg-white border-e border-gray-200 pt-7 pb-10 overflow-y-auto end-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 lg:block`}
+        } top-0 start-0 bottom-0 lg:z-0 z-[60] w-64 bg-white border-e border-gray-200 pt-7 pb-10 overflow-y-auto end-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 lg:block`}
       >
         <button
           onClick={handleSidebarToggle}
