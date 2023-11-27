@@ -10,12 +10,6 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   return (
     <div className="bg-slate-200 text-blue">
-      <Header>
-        <div className="pt-3">The EC Doc (Unofficial) Chatbot Search</div>
-        <div className="text-xs pb-2">
-          Built by <a href="https://www.campaignlab.uk">Campaign Lab</a>
-        </div>
-      </Header>
       <Sidebar>
         <SidebarContent />
       </Sidebar>
