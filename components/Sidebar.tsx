@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import {
+  Bars3Icon,
+} from '@heroicons/react/24/solid';
 
 export const Sidebar: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -12,6 +15,12 @@ export const Sidebar: React.FC<{ children: React.ReactNode }> = ({
     <>
       <div className="sticky top-0 lg:ps-64  border-y px-4 sm:px-6 md:px-8 flex">
         <SidebarToggle onToggle={handleSidebarToggle} />
+        <div className='flex flex-col pl-3'>
+            <div className="pt-3">The EC Doc (Unofficial) Chatbot Search</div>
+            <div className="text-xs pb-2">
+            A <a href="https://www.campaignlab.uk">Campaign Lab</a> project
+            </div>
+        </div>
       </div>
       <div
         id="application-sidebar"
@@ -35,29 +44,14 @@ const SidebarToggle: React.FC<{ onToggle: () => void }> = ({ onToggle }) => (
   <div className="flex items-center py-4">
     <button
       type="button"
-      className="text-gray-500 hover:text-gray-600"
+      className="text-gray-500 hover:text-gray-600 lg:hidden"
       data-hs-overlay="#application-sidebar"
       aria-controls="application-sidebar"
       aria-label="Toggle navigation"
       onClick={onToggle}
     >
       <span className="sr-only">Toggle Navigation</span>
-      <svg
-        className="flex-shrink-0 w-4 h-4"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <line x1="3" x2="21" y1="6" y2="6" />
-        <line x1="3" x2="21" y1="12" y2="12" />
-        <line x1="3" x2="21" y1="18" y2="18" />
-      </svg>
+      <Bars3Icon className="flex-shrink-0 w-6 h-6" />
     </button>
   </div>
 );
