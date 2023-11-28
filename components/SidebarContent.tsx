@@ -7,9 +7,6 @@ export const SidebarContent: React.FC = () => (
     <div>
       <h3 className="pt-3 text-white">Disclaimer</h3>
       <Disclaimers dark />
-      <p className="text-sm text-white">
-        Built by <a href="https://www.campaignlab.uk">Campaign Lab</a>
-      </p>
     </div>
   </div>
 );
