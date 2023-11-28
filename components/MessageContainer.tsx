@@ -115,7 +115,7 @@ const SourceAccordion: React.FC<{
                     {doc.pageContent}
                   </ReactMarkdown>
                   <p className="italic">
-                    <b>Source:</b> {doc.metadata.source}
+                    <b>Source:</b> {adjustSource(doc.metadata.source)}
                   </p>
                 </li>
               ))}
