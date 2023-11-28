@@ -9,7 +9,28 @@ import { DirectoryLoader } from 'langchain/document_loaders/fs/directory';
 /* Name of directory to retrieve your files from 
    Make sure to add your PDF files inside the 'docs' folder
 */
-const filePath = 'docs';
+
+const MAX_METADATA_SIZE = 40000; // 40 KB
+
+function truncateMetadata(metadata: Record<string, any>): Record<string, any> {
+  let serializedMetadata = JSON.stringify(metadata);
+  if (Buffer.byteLength(serializedMetadata, 'utf-8') <= MAX_METADATA_SIZE) {
+    return metadata;
+  }
+
+  const keys = Object.keys(metadata);
+  for (const key of keys) {
+    delete metadata[key];
+    serializedMetadata = JSON.stringify(metadata);
+    if (Buffer.byteLength(serializedMetadata, 'utf-8') <= MAX_METADATA_SIZE) {
+      break;
+    }
+  }
+
+  return metadata;
+}
+
+const filePath = 'docs/batch_9'; //batch 0-9 complete
 
 export const run = async () => {
   try {
@@ -35,7 +56,10 @@ export const run = async () => {
     const embeddings = new OpenAIEmbeddings();
     const index = pinecone.Index(PINECONE_INDEX_NAME); //change to your own index name
 
-    //embed the PDF documents
+    for (const doc of docs) {
+      doc.metadata = truncateMetadata(doc.metadata);
+    }
+
     await PineconeStore.fromDocuments(docs, embeddings, {
       pineconeIndex: index,
       namespace: PINECONE_NAME_SPACE,

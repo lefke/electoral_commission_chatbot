@@ -15,6 +15,26 @@ import { Document } from 'langchain/document';
 
 import styles from '@/styles/Home.module.css';
 
+//Adjust the source back to URL format and handle PDFs
+function adjustSource(source: string): JSX.Element {
+    const baseUrl = 'https://www.electoralcommission.org.uk/';
+    let adjustedSource = source
+        .slice(0, -4) // Remove the '.pdf'
+        .replace(/.*docs\/(batch_[0-9]\/)?/, '') // Remove the leading directory structure
+        .replace(/_(.{15})$/, '') // Remove characters after the final '_' if there are exactly 15 characters
+        .replace(/___/g, '/')
+        .replace(/__/g, '/');
+
+    const parts = adjustedSource.split('/');
+    const lastSegment = parts.pop();
+    const isPdf = lastSegment && lastSegment.length === 15;
+
+    const finalUrl = isPdf ? baseUrl + parts.join('/') : baseUrl + adjustedSource;
+    const displayText = isPdf ? "PDF in page" : finalUrl;
+
+    return <a href={finalUrl} target="_blank" rel="noopener noreferrer">{displayText}</a>;
+}
+
 export const MessageContainer: React.FC<{
   loading: boolean;
   messageState: MessageState;
