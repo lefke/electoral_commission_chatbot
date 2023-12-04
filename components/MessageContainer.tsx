@@ -15,6 +15,30 @@ import { Document } from 'langchain/document';
 
 import styles from '@/styles/Home.module.css';
 
+//Adjust the source back to URL format and handle PDFs
+function formatSource(source: string): JSX.Element {
+  const baseUrl = 'https://www.electoralcommission.org.uk/';
+  let adjustedSource = source
+    .slice(0, -4) // Remove the '.pdf'
+    .replace(/.*docs\/(batch_[0-9]\/)?/, '') // Remove the leading directory structure
+    .replace(/_(.{15})$/, '') // Remove characters after the final '_' if there are exactly 15 characters
+    .replace(/___/g, '/')
+    .replace(/__/g, '/');
+
+  const parts = adjustedSource.split('/');
+  const lastSegment = parts.pop();
+  const isPdf = lastSegment && lastSegment.length === 15;
+
+  const finalUrl = isPdf ? baseUrl + parts.join('/') : baseUrl + adjustedSource;
+  const displayText = isPdf ? 'PDF in page' : finalUrl;
+
+  return (
+    <a href={finalUrl} target="_blank" rel="noopener noreferrer">
+      {displayText}
+    </a>
+  );
+}
+
 export const MessageContainer: React.FC<{
   loading: boolean;
   messageState: MessageState;
@@ -76,30 +100,39 @@ const SourceAccordion: React.FC<{
   sourceDocs: Document<Record<string, any>>[];
   msgIdx: number;
 }> = ({ sourceDocs, msgIdx }) => {
+  const accordionEndRef = useRef<HTMLDivElement>(null);
   return (
     <div className="" key={`sourceDocsAccordion-${msgIdx}`}>
       <Accordion
         type="single"
         collapsible
-        className="bg-ec-grey-50 flex flex-col"
+        className="bg-ec-grey-50 flex flex-col px-4"
       >
         <AccordionItem className="" value={`item-${msgIdx}`}>
-          <AccordionTrigger className="container">
+          <AccordionTrigger
+            className="container"
+            onClick={() =>
+              accordionEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+            }
+          >
             <h3>Source</h3>
           </AccordionTrigger>
           <AccordionContent className="container">
-            <ul className="list-disc">
-              {sourceDocs.map((doc, index) => (
-                <li key={`src-${index}`} className="flex flex-col mb-6">
-                  <ReactMarkdown linkTarget="_blank">
-                    {doc.pageContent}
-                  </ReactMarkdown>
-                  <p className="italic">
-                    <b>Source:</b> {doc.metadata.source}
-                  </p>
-                </li>
-              ))}
-            </ul>
+            <>
+              <ul className="list-disc">
+                {sourceDocs.map((doc, index) => (
+                  <li key={`src-${index}`} className="flex flex-col mb-6">
+                    <ReactMarkdown linkTarget="_blank">
+                      {doc.pageContent}
+                    </ReactMarkdown>
+                    <p className="italic">
+                      <b>Source:</b> {formatSource(doc.metadata.source)}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+              <div ref={accordionEndRef} className="h-0" />
+            </>
           </AccordionContent>
         </AccordionItem>
       </Accordion>
