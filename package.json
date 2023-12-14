@@ -15,7 +15,8 @@
     "ingest": "tsx -r dotenv/config scripts/ingest-data.ts"
   },
   "engines": {
-    "node": "18.15.0"
+    "node": "18.15.0",
+    "npm": "9.8.1"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
