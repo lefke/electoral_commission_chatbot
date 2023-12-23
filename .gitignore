@@ -42,3 +42,5 @@ next-env.d.ts
 .yarn/
 
 user_questions.csv
+
+docs
