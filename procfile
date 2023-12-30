@@ -1,2 +1,2 @@
 web: npm start
-web: gunicorn chatproject.chatproject.wsgi   
+web: cd chatproject && gunicorn chatproject.chatproject.wsgi   

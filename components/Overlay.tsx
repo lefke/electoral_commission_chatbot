@@ -1,6 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import { Disclaimers } from './ui/Disclaimers';
+import Image from 'next/image';
 
 export default function LoadingModal() {
   const [isOpen, setIsOpen] = useState(true);
@@ -40,12 +41,13 @@ export default function LoadingModal() {
                   When decoding electoral guidance feels a bit like:
                 </Dialog.Title>
                 <div className="mt-2">
-                  <div className="px-6 pb-3 w-56 mx-auto">
-                    <img 
+                  <div style={{ maxWidth: '200px' }}>
+                    <Image 
                       src="/work-working.gif"
-                      max-width="200px" 
-                      width="100%"
-                      height="100%"
+                      width={500}  // replace with the actual image width
+                      height={500} // replace with the actual image height
+                      layout="responsive"
+                      alt="Person behind desk experiencing frustration over managing too many papers"
                     />
                   </div>
                   <h2 className="px-6 pb-3">
