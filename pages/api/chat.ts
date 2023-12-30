@@ -11,6 +11,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
+  
   const { question, history, conversationId } = req.body;
 
   // console.log('question', question);
@@ -63,7 +64,7 @@ export default async function handler(
 
     const updatedHistory = [...history, question, response.text];
 
-    const chatApiUrl = process.env.CHAT_API_URL || 'http://localhost:8000/api/chat/';
+    const chatApiUrl = process.env.CHAT_API_URL || 'http://127.0.0.1:8000/api/chat/';
 
     const djangoRes = await axios.post(chatApiUrl, {
     // const djangoRes = await axios.post('http://127.0.0.1:8000/api/chat/', {

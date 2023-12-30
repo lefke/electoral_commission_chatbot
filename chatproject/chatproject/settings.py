@@ -84,8 +84,8 @@ WSGI_APPLICATION = 'chatproject.wsgi.application'
 # }
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
-    # 'default': dj_database_url.config(default='postgres://cardigan@localhost/postgres')
+    # 'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+    'default': dj_database_url.config(default='postgres://cardigan@localhost/postgres')
 }
 
 # You just gotta find and set the heroku database URL 
