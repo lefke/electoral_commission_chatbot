@@ -17,6 +17,10 @@ import styles from '@/styles/Home.module.css';
 
 //Adjust the source back to URL format and handle PDFs
 function formatSource(source: string): JSX.Element {
+  if (typeof source !== 'string') {
+    // Handle the case where source is not a string
+    return <span>Source not available</span>;
+  }
   const baseUrl = 'https://www.electoralcommission.org.uk/';
   let adjustedSource = source
     .slice(0, -4) // Remove the '.pdf'
@@ -96,11 +100,47 @@ const MessageLine: React.FC<{
   );
 };
 
+function getUniqueSourceDocs(sourceDocs: Document<Record<string, any>>[]): Document<Record<string, any>>[] {
+  const uniqueDocs = new Map<string, Document<Record<string, any>>>();
+
+  sourceDocs.forEach((doc) => {
+    const normalizedContent = doc.pageContent.toLowerCase(); // Normalize to lower case for comparison
+    if (!uniqueDocs.has(normalizedContent)) {
+      uniqueDocs.set(normalizedContent, doc);
+    }
+  });
+
+  return Array.from(uniqueDocs.values());
+}
+
+// Helper function to format the document content for display
+function formatDocumentContent(content: string): string {
+  // Replace multiple newlines and spaces with a single space
+  let cleanedContent = content
+    .replace(/\n+/g, '\n') // Replace multiple newlines with a single newline
+    .replace(/[ \t]+/g, ' ') // Replace multiple spaces/tabs with a single space
+    .trim(); // Trim whitespace from the start and end
+
+  // Add '...' to the beginning if it doesn't start with a capital letter
+  if (cleanedContent && !cleanedContent.charAt(0).match(/[A-Z]/)) {
+    cleanedContent = '...' + cleanedContent;
+  }
+
+  // Add '...' to the end if it doesn't end with a full stop
+  if (cleanedContent && !cleanedContent.endsWith('.')) {
+    cleanedContent += '...';
+  }
+  return cleanedContent;
+}
+
 const SourceAccordion: React.FC<{
   sourceDocs: Document<Record<string, any>>[];
   msgIdx: number;
 }> = ({ sourceDocs, msgIdx }) => {
   const accordionEndRef = useRef<HTMLDivElement>(null);
+
+  const uniqueSourceDocs = getUniqueSourceDocs(sourceDocs);
+
   return (
     <div className="" key={`sourceDocsAccordion-${msgIdx}`}>
       <Accordion
@@ -115,15 +155,15 @@ const SourceAccordion: React.FC<{
               accordionEndRef.current?.scrollIntoView({ behavior: 'smooth' })
             }
           >
-            <h3>Source</h3>
+            <h3>Sources</h3>
           </AccordionTrigger>
           <AccordionContent className="container">
             <>
               <ul className="list-disc">
-                {sourceDocs.map((doc, index) => (
+                {uniqueSourceDocs.map((doc, index) => (
                   <li key={`src-${index}`} className="flex flex-col mb-6">
                     <ReactMarkdown linkTarget="_blank">
-                      {doc.pageContent}
+                      {formatDocumentContent(doc.pageContent)}
                     </ReactMarkdown>
                     <p className="italic">
                       <b>Source:</b> {formatSource(doc.metadata.source)}

@@ -5,15 +5,17 @@ import { AIMessage, HumanMessage } from 'langchain/schema';
 import { makeChain } from '@/utils/makechain';
 import { pinecone } from '@/utils/pinecone-client';
 import { PINECONE_INDEX_NAME, PINECONE_NAME_SPACE } from '@/config/pinecone';
+import axios from 'axios';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const { question, history } = req.body;
+  const { question, history, conversationId } = req.body;
 
-  console.log('question', question);
-  console.log('history', history);
+  // console.log('question', question);
+  // console.log('history', history);
+  // console.log('id', conversationId);
 
   //only accept post requests
   if (req.method !== 'POST') {
@@ -56,6 +58,23 @@ export default async function handler(
       question: sanitizedQuestion,
       chat_history: pastMessages
     });
+
+    console.log('sanitizedQuestion:', sanitizedQuestion);
+
+    const updatedHistory = [...history, question, response.text];
+
+    const chatApiUrl = process.env.CHAT_API_URL || 'http://localhost:8000/api/chat/';
+
+    const djangoRes = await axios.post(chatApiUrl, {
+    // const djangoRes = await axios.post('http://127.0.0.1:8000/api/chat/', {
+      history: updatedHistory,
+      response: response,
+      conversationId: conversationId,
+    });
+
+    if (djangoRes.status !== 200) {
+      console.error('Failed to store chat history in Django', djangoRes.data);
+    }
 
     console.log('response', response);
     res.status(200).json(response);
