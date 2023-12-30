@@ -12,8 +12,8 @@ import sys
 
 from django.core.wsgi import get_wsgi_application
 
-sys.path.append('chatproject/chatapp')
+# sys.path.append('chatproject/chatapp')
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'chatproject.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'chatproject.chatproject.settings')
 
 application = get_wsgi_application()
