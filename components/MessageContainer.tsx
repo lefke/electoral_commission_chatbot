@@ -74,15 +74,17 @@ const MessageLine: React.FC<{
   message: Message;
   loading: boolean;
 }> = ({ message, loading }) => {
-  const apiMsgClass = 'bg-ec-blue-50 p-6 flex';
-  const userMsgClass = loading
-    ? styles.usermessagewaiting + ' flex'
-    : 'bg-white p-6 flex';
+  const msgClass = `p-6 flex ${
+    message.type === 'apiMessage' ? 'bg-ec-blue-50' : loading ? '' : 'bg-white'
+  }`;
 
-  const className = message.type === 'apiMessage' ? apiMsgClass : userMsgClass;
   return (
-    <div className={`border-b border-b-slate-200`}>
-      <div className={`${className} container`}>
+    <div
+      className={`border-b border-b-slate-200 ${
+        loading ? styles.usermessagewaiting : ''
+      }`}
+    >
+      <div className={`${msgClass} container`}>
         {message.type === 'apiMessage' ? (
           <ChatBubbleLeftEllipsisIcon className="shrink-0 h-[24px] w-[24px] text-ec-blue-900 mr-3" />
         ) : (

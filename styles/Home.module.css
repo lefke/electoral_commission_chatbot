@@ -1,4 +1,3 @@
-
 .textarea {
   resize: none;
   padding: 1rem 2.2rem 1rem 2rem;
@@ -48,13 +47,14 @@
 }
 
 .usermessagewaiting {
-  padding: 1.5rem;
   color: #000;
-  background: linear-gradient(to left, #07080938, #1a1c2024, #07080936);
+  background-color: white;
+  box-shadow: inset 10px 0 5px -10px white;
+  background: linear-gradient(to left, #7f7f7f24, white, #7f7f7f24);
   background-size: 200% 200%;
   background-position: -100% 0;
-  animation: loading-gradient 2s ease-in-out infinite;
-  animation-direction: alternate;
+  animation: loading-gradient 1.5s ease-in-out infinite;
+  animation-direction: left;
   animation-name: loading-gradient;
 }
 
@@ -85,13 +85,13 @@
 }
 
 .markdownanswer a {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .markdownanswer img {
-    max-width: 260px;
-    width: 60%;
-    height: auto;
+  max-width: 260px;
+  width: 60%;
+  height: auto;
 }
 
 .markdownanswer code {
