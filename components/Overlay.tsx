@@ -1,10 +1,26 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Disclaimers } from './ui/Disclaimers';
 
+const DISCLAIMERS_ACKNOWLEDGED_FLAG = 'disclaimers-acknowledged';
+
 export default function LoadingModal() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [disclaimersRead, setDisclaimersRead] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const disclaimersAlreadySeen = localStorage.getItem(
+        DISCLAIMERS_ACKNOWLEDGED_FLAG,
+      );
+      setIsOpen(disclaimersAlreadySeen !== 'true');
+    }
+  }, []);
+
+  const handleDisclaimerAcknowledge = () => {
+    setIsOpen(false);
+    localStorage.setItem(DISCLAIMERS_ACKNOWLEDGED_FLAG, 'true');
+  };
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -41,9 +57,9 @@ export default function LoadingModal() {
                 </Dialog.Title>
                 <div className="mt-2">
                   <div className="px-6 pb-3 w-56 mx-auto">
-                    <img 
+                    <img
                       src="/work-working.gif"
-                      max-width="200px" 
+                      max-width="200px"
                       width="100%"
                       height="100%"
                     />
@@ -77,20 +93,14 @@ export default function LoadingModal() {
                 </div>
 
                 <div className="text-center bg-white p-6 pt-3">
-                  {disclaimersRead ? (
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={() => setIsOpen(false)}
-                      disabled={!disclaimersRead}
-                    >
-                      Get started!
-                    </button>
-                  ) : (
-                    <span className="italic text-sm">
-                      Please acknowledge disclaimers to get started
-                    </span>
-                  )}
+                  <button
+                    type="button"
+                    className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:bg-gray-200 disabled:text-gray-500"
+                    onClick={handleDisclaimerAcknowledge}
+                    disabled={!disclaimersRead}
+                  >
+                    Get started!
+                  </button>
                 </div>
               </Dialog.Panel>
             </Transition.Child>
