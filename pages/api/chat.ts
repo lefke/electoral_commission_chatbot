@@ -64,9 +64,7 @@ export default async function handler(
 
     const updatedHistory = [...history, question, response.text];
 
-    const DATABASE_URL_0 = DATABASE_URL || 'http://127.0.0.1:8000/api/chat/';
-
-    //#####Should this be the server url, not chat?
+    const DATABASE_URL_0 = process.env.DATABASE_URL || 'http://127.0.0.1:8000/api/chat/';
 
     const djangoRes = await axios.post(DATABASE_URL_0, {
     // const djangoRes = await axios.post('http://127.0.0.1:8000/api/chat/', {
