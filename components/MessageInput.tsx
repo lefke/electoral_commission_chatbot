@@ -67,7 +67,7 @@ export const MessageInput: React.FC<{
   
     try {
       // Send the question to the server and get the response
-      const response = await fetch(CHAT_API_URL || '/api/chat', {
+      const response = await fetch(process.env.CHAT_API_URL || '/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
