@@ -139,7 +139,7 @@ const SourceAccordion: React.FC<{
 }> = ({ sourceDocs, msgIdx }) => {
   const accordionEndRef = useRef<HTMLDivElement>(null);
 
-  const uniqueSourceDocs = getUniqueSourceDocs(sourceDocs);
+  const uniqueSourceDocs = sourceDocs ? getUniqueSourceDocs(sourceDocs) : [];
 
   return (
     <div className="" key={`sourceDocsAccordion-${msgIdx}`}>
