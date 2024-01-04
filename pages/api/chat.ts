@@ -16,6 +16,9 @@ export default async function handler(
   const { question, history, conversationId } = req.body;
   const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
   });
 
   // console.log('question', question);
