@@ -84,6 +84,7 @@ export const MessageInput: React.FC<{
       if (data.error) {
         setError(data.error);
       } else {
+        const sourceDocs = data.sourceDocuments || [];
         // Update the local state with the new message and response
         setMessageState((prevState) => ({
           ...prevState,
