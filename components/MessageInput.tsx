@@ -9,7 +9,7 @@ import { MessageState } from '@/types/chat';
 import styles from '@/styles/Home.module.css';
 import LoadingDots from './ui/LoadingDots';
 import { ToastMessage } from './ui/ToastMessage';
-import axios from 'axios';
+// import axios from 'axios';
 
 export const MessageInput: React.FC<{
   loading: boolean;
@@ -67,7 +67,7 @@ export const MessageInput: React.FC<{
   
     try {
       // Send the question to the server and get the response
-      const response = await fetch('/api/chat/', {
+      const response = await fetch(CHAT_API_URL || '/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

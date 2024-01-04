@@ -64,14 +64,18 @@ export default async function handler(
 
     const updatedHistory = [...history, question, response.text];
 
-    const chatApiUrl = process.env.CHAT_API_URL || 'http://127.0.0.1:8000/api/chat/';
+    const DATABASE_URL_0 = DATABASE_URL || 'http://127.0.0.1:8000/api/chat/';
 
-    const djangoRes = await axios.post(chatApiUrl, {
+    //#####Should this be the server url, not chat?
+
+    const djangoRes = await axios.post(DATABASE_URL_0, {
     // const djangoRes = await axios.post('http://127.0.0.1:8000/api/chat/', {
       history: updatedHistory,
       response: response,
       conversationId: conversationId,
     });
+
+    // c427ab169725fd06d5ecff1d91d78b6c9fc56003ae71a62cd9b54a0190dcb6a5
 
     if (djangoRes.status !== 200) {
       console.error('Failed to store chat history in Django', djangoRes.data);
