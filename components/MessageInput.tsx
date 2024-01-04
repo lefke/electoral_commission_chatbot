@@ -93,6 +93,7 @@ export const MessageInput: React.FC<{
             {
               type: 'userMessage',
               message: question,
+              sourceDocs: []
             },
             {
               type: 'apiMessage',
