@@ -89,7 +89,7 @@ export default async function handler(
 
     const result = await pool.query(
       'INSERT INTO chatapp_chatmessage (history, response, "conversationId") VALUES ($1, $2, $3)',
-      [updatedHistory, response, conversationId]
+      [JSON.stringify(updatedHistory), JSON.stringify(response), conversationId]
     );
   
     if (result.rowCount === 0) {
