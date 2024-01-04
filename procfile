@@ -1,2 +1,2 @@
-web: gunicorn chatproject.chatproject.wsgi
+worker: gunicorn chatproject.chatproject.wsgi
 web: npm start
