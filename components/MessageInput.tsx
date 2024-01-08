@@ -9,6 +9,7 @@ import { MessageState } from '@/types/chat';
 import styles from '@/styles/Home.module.css';
 import LoadingDots from './ui/LoadingDots';
 import { ToastMessage } from './ui/ToastMessage';
+// import axios from 'axios';
 
 export const MessageInput: React.FC<{
   loading: boolean;
@@ -18,8 +19,31 @@ export const MessageInput: React.FC<{
 }> = ({ loading, setLoading, messageState, setMessageState }) => {
   const [query, setQuery] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
+  const [conversationId, setconversationId] = useState<string>('');
 
   const { history } = messageState;
+
+  function generateUUID() { // Public Domain/MIT
+    var d = new Date().getTime();//Timestamp
+    var d2 = (performance && performance.now && (performance.now()*1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16;//random number between 0 and 16
+        if(d > 0){//Use timestamp until depleted
+            r = (d + r)%16 | 0;
+            d = Math.floor(d/16);
+        } else {//Use microseconds since page-load if supported
+            r = (d2 + r)%16 | 0;
+            d2 = Math.floor(d2/16);
+        }
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+}
+
+  useEffect(() => {
+    const newconversationId = generateUUID();
+    window.localStorage.setItem('conversationId', newconversationId);
+    setconversationId(newconversationId);
+  }, []);
 
   useEffect(() => {
     setTimeout(() => error && setError(null), 2500);
@@ -28,78 +52,116 @@ export const MessageInput: React.FC<{
   //handle form submission
   async function handleSubmit(e: any) {
     e.preventDefault();
-
+  
     setError(null);
-
+  
     if (!query) {
       alert('Please input a question');
       return;
     }
-
+  
     const question = query.trim();
-
-    setMessageState((state) => ({
-      ...state,
-      messages: [
-        ...state.messages,
-        {
-          type: 'userMessage',
-          message: question,
-        },
-      ],
-    }));
-
+  
     setLoading(true);
     setQuery('');
-
+  
     try {
-      const response = await fetch('/api/chat', {
+      // Send the question to the server and get the response
+      const response = await fetch(process.env.CHAT_API_URL || '/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           question,
-          history,
+          history: messageState.history,
+          conversationId,
         }),
       });
+  
       const data = await response.json();
-
+  
       if (data.error) {
         setError(data.error);
       } else {
-        setMessageState((state) => ({
-          ...state,
+        const sourceDocs = data.sourceDocuments || [];
+        // Update the local state with the new message and response
+        setMessageState((prevState) => ({
+          ...prevState,
           messages: [
-            ...state.messages,
+            ...prevState.messages,
+            {
+              type: 'userMessage',
+              message: question,
+              sourceDocs: []
+            },
             {
               type: 'apiMessage',
               message: data.text,
               sourceDocs: data.sourceDocuments,
             },
           ],
-          history: [...state.history, [question, data.text]],
+          history: [...prevState.history, [question, data.text]],
         }));
       }
-
-      setLoading(false);
-
-      const appendResponse = await fetch('/api/appendQuestion', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ question }),
-      });
-
-      if (!appendResponse.ok) {
-        console.error('Failed to append question to CSV');
-      }
     } catch (error) {
-      setLoading(false);
       setError('An error occurred while fetching the data. Please try again.');
+    } finally {
+      setLoading(false);
     }
   }
+    // setMessageState((state) => ({
+    //   ...state,
+    //   messages: [
+    //     ...state.messages,
+    //     {
+    //       type: 'userMessage',
+    //       message: question,
+    //     },
+    //   ],
+    // }));
+
+    // setLoading(true);
+    // setQuery('');
+
+    // try {
+    //   const response = await fetch('/api/chat/', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //       question,
+    //       history,
+    //       conversationId,
+    //     }),
+    //   });
+    //   const data = await response.json();
+
+    //   if (data.error) {
+    //     setError(data.error);
+    //   } else {
+    //     setMessageState((state) => ({
+    //       ...state,
+    //       messages: [
+    //         ...state.messages,
+    //         {
+    //           type: 'apiMessage',
+    //           message: data.text,
+    //           sourceDocs: data.sourceDocuments,
+    //         },
+    //       ],
+    //       history: [...state.history, [question, data.text]],
+    //     }));
+    //   }
+
+    //   setLoading(false);
+
+  //   } catch (error) {
+  //     setLoading(false);
+  //     setError('An error occurred while fetching the data. Please try again.');
+  //   }
+  // }
 
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -168,8 +230,7 @@ export const MessageInput: React.FC<{
           </button>
         </form>
         <div className="w-full text-center text-xs italic text-gray-400 font-light">
-          I am an AI powered search tool, all data provided should be fact
-          checked
+          Powered by GPT-4
         </div>
       </div>
     </div>
