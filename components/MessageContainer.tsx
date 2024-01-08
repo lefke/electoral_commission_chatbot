@@ -12,6 +12,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Document } from 'langchain/document';
+import { uniq } from 'lodash';
 
 import styles from '@/styles/Home.module.css';
 
@@ -122,7 +123,7 @@ const SourceAccordion: React.FC<{
           <AccordionContent className="container">
             <>
               <ul className="list-disc">
-                {sourceDocs.map((doc, index) => (
+                {uniq(sourceDocs).map((doc, index) => (
                   <li key={`src-${index}`} className="flex flex-col mb-6">
                     <ReactMarkdown linkTarget="_blank">
                       {doc.pageContent}
