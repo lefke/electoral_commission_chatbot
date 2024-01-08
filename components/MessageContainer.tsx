@@ -22,7 +22,9 @@ function formatSource(source: string): JSX.Element {
   }
 
   // Remove the terms '1/', '2/', and 'Big/' from the source string
-  let adjustedSource = source.replace(/(1\/|2\/|Big\/)/g, '');
+  let adjustedSource = source
+    .replace(/^.*\/docs\//, '') // Remove the directory structure
+    .replace(/(1\/|2\/|Big\/)/g, '');
 
   // Check if the source string ends with '.pdf'
   const isPdf = adjustedSource.includes('sites_default') || adjustedSource.endsWith('.pdf');
