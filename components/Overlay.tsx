@@ -1,6 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import { Disclaimers } from './ui/Disclaimers';
+import { Information } from './ui/Information';
 import Image from 'next/image';
 
 export default function LoadingModal() {
@@ -38,12 +39,12 @@ export default function LoadingModal() {
                   as="h3"
                   className="text-lg text-center font-medium leading-6 px-6 pt-6 pb-3"
                 >
-                  When decoding electoral guidance feels a bit like:
+                  Find information faster on the Electoral Commission website:
                 </Dialog.Title>
                 <div className="mt-2">
                   <div className="px-6 pb-3 w-56 mx-auto">
                     <img
-                      src="/work-working.gif"
+                      src="do-job-better.png"
                       max-width="200px"
                       width="100%"
                       height="100%"
@@ -53,7 +54,9 @@ export default function LoadingModal() {
                     Ask the (unofficial) chat bot to do the searching for you
                   </h2>
                   <div className="bg-white p-6 pb-3">
-                    <h3 className=" text-gray-500">Disclaimers</h3>
+                    <h3 className=" text-gray-500">Information</h3>
+                    <Information />
+                    <h3 className=" text-gray-500">Disclaimer</h3>
                     <Disclaimers />
                     <div className="relative flex gap-x-3">
                       <div className="flex h-6 items-center">

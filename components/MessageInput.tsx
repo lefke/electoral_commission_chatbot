@@ -230,8 +230,7 @@ export const MessageInput: React.FC<{
           </button>
         </form>
         <div className="w-full text-center text-xs italic text-gray-400 font-light">
-          I am an AI powered search tool, all data provided should be fact
-          checked
+          Powered by GPT-4
         </div>
       </div>
     </div>

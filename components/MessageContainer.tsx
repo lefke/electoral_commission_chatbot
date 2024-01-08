@@ -15,55 +15,34 @@ import { Document } from 'langchain/document';
 
 import styles from '@/styles/Home.module.css';
 
-//Adjust the source back to URL format and handle PDFs
-function formatSource(source: string): JSX.Element {
-  if (typeof source !== 'string') {
-    return <span>Source not available</span>;
-  }
-
-  // Remove the terms '1/', '2/', and 'Big/' from the source string
-  let adjustedSource = source
-    .replace(/^.*\/docs\//, '') // Remove the directory structure
-    .replace(/(1\/|2\/|Big\/)/g, '');
-
-  // Check if the source string ends with '.pdf'
-  const isPdf = adjustedSource.includes('sites_default') || adjustedSource.endsWith('.pdf');
-  if (isPdf) {
-    // Extract the filename without the extension and directory prefix
-    const filename = adjustedSource
-      .replace('sites_default_files_pdf_file_', '')
-      .slice(0, -4) // Remove the '.pdf'
-      .replace(/-/g, '+'); // Replace '-' with '+'
-
-    // Create the search query URL
-    const searchUrl = `https://www.electoralcommission.org.uk/search?search=${filename}`;
-    return (
-      <a href={searchUrl} target="_blank" rel="noopener noreferrer">
-        Search the Website
-      </a>
-    );
-  } else {
-    // Replace underscores with slashes and remove the file extension
-    adjustedSource = adjustedSource
-      .replace(/_/g, '/')
-      .slice(0, -4)
-
-    const finalUrl = 'https://www.electoralcommission.org.uk/' + adjustedSource;
-    return (
-      <a href={finalUrl} target="_blank" rel="noopener noreferrer">
-        {finalUrl}
-      </a>
-    );
-  }
-}
-
 export const MessageContainer: React.FC<{
   loading: boolean;
   messageState: MessageState;
-}> = ({ loading, messageState }) => {
+  onSuggestionClick: (suggestion: string) => void;
+}> = ({ loading, messageState, onSuggestionClick }) => {
+// }> = ({ loading, messageState }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const { messages } = messageState;
+
+  const renderMessageWithSuggestions = (message: string) => {
+    // Split the message by lines to find suggestions
+    const lines = message.split('\n');
+    return lines.map((line, index) => {
+      if (line.startsWith('👉 ')) {
+        // It's a suggestion, make it clickable
+        const suggestion = line.substring(3); // Remove the '👉 ' part
+        return (
+          <div key={index} className="suggestion" onClick={() => onSuggestionClick(suggestion)}>
+            {line}
+          </div>
+        );
+      } else {
+        // It's not a suggestion, just display it
+        return <div key={index}>{line}</div>;
+      }
+    });
+  };
 
   useEffect(
     () => messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }),
@@ -125,6 +104,48 @@ function getUniqueSourceDocs(sourceDocs: Document<Record<string, any>>[]): Docum
   });
 
   return Array.from(uniqueDocs.values());
+}
+
+//Adjust the source back to URL format and handle PDFs
+function formatSource(source: string): JSX.Element {
+  if (typeof source !== 'string') {
+    return <span>Source not available</span>;
+  }
+
+  // Remove the terms '1/', '2/', and 'Big/' from the source string
+  let adjustedSource = source
+    .replace(/^.*\/docs\//, '') // Remove the directory structure
+    .replace(/(1\/|2\/|Big\/)/g, '');
+
+  // Check if the source string ends with '.pdf'
+  const isPdf = adjustedSource.includes('sites_default') || adjustedSource.endsWith('.pdf');
+  if (isPdf) {
+    // Extract the filename without the extension and directory prefix
+    const filename = adjustedSource
+      .replace('sites_default_files_pdf_file_', '')
+      .slice(0, -4) // Remove the '.pdf'
+      .replace(/-/g, '+'); // Replace '-' with '+'
+
+    // Create the search query URL
+    const searchUrl = `https://www.electoralcommission.org.uk/search?search=${filename}`;
+    return (
+      <a href={searchUrl} target="_blank" rel="noopener noreferrer" className="source-link">
+        Search the Website for this PDF
+      </a>
+    );
+  } else {
+    // Replace underscores with slashes and remove the file extension
+    adjustedSource = adjustedSource
+      .replace(/_/g, '/')
+      .slice(0, -4)
+
+    const finalUrl = 'https://www.electoralcommission.org.uk/' + adjustedSource;
+    return (
+      <a href={finalUrl} target="_blank" rel="noopener noreferrer" className="source-link">
+        {finalUrl}
+      </a>
+    );
+  }
 }
 
 // Helper function to format the document content for display

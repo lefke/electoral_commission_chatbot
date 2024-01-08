@@ -17,7 +17,7 @@ export const Title: React.FC<{ dark?: boolean }> = ({ dark = false }) => (
       dark ? 'text-white' : 'text-black'
     } flex flex-col pl-3 gap-0 lg:gap-3`}
   >
-    <div className="pt-2">The EC Doc (Unofficial) Chatbot Search</div>
+    <div className="pt-2">The (Unofficial) Electoral Commission Chatbot</div>
     <div className="text-xs pb-2">
       A{' '}
       <a

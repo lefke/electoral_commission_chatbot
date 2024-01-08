@@ -6,6 +6,11 @@
   @apply w-full max-w-[60rem] mx-auto;
 }
 
+.source-link {
+  color: blue;
+  text-decoration: underline;
+}
+
 /* ===== Start Toast styles ===== */
 .ToastViewport {
   --viewport-padding: 1rem;
