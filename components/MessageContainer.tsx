@@ -39,7 +39,7 @@ function formatSource(source: string): JSX.Element {
     const searchUrl = `https://www.electoralcommission.org.uk/search?search=${filename}`;
     return (
       <a href={searchUrl} target="_blank" rel="noopener noreferrer">
-        PDF in page
+        Search the Website
       </a>
     );
   } else {
