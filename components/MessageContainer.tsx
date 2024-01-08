@@ -18,29 +18,41 @@ import styles from '@/styles/Home.module.css';
 //Adjust the source back to URL format and handle PDFs
 function formatSource(source: string): JSX.Element {
   if (typeof source !== 'string') {
-    // Handle the case where source is not a string
     return <span>Source not available</span>;
   }
-  const baseUrl = 'https://www.electoralcommission.org.uk/';
-  let adjustedSource = source
-    .slice(0, -4) // Remove the '.pdf'
-    .replace(/.*docs\/(batch_[0-9]\/)?/, '') // Remove the leading directory structure
-    .replace(/_(.{15})$/, '') // Remove characters after the final '_' if there are exactly 15 characters
-    .replace(/___/g, '/')
-    .replace(/__/g, '/');
 
-  const parts = adjustedSource.split('/');
-  const lastSegment = parts.pop();
-  const isPdf = lastSegment && lastSegment.length === 15;
+  // Remove the terms '1/', '2/', and 'Big/' from the source string
+  let adjustedSource = source.replace(/(1\/|2\/|Big\/)/g, '');
 
-  const finalUrl = isPdf ? baseUrl + parts.join('/') : baseUrl + adjustedSource;
-  const displayText = isPdf ? 'PDF in page' : finalUrl;
+  // Check if the source string ends with '.pdf'
+  const isPdf = adjustedSource.includes('sites_default') || adjustedSource.endsWith('.pdf');
+  if (isPdf) {
+    // Extract the filename without the extension and directory prefix
+    const filename = adjustedSource
+      .replace('sites_default_files_pdf_file_', '')
+      .slice(0, -4) // Remove the '.pdf'
+      .replace(/-/g, '+'); // Replace '-' with '+'
 
-  return (
-    <a href={finalUrl} target="_blank" rel="noopener noreferrer">
-      {displayText}
-    </a>
-  );
+    // Create the search query URL
+    const searchUrl = `https://www.electoralcommission.org.uk/search?search=${filename}`;
+    return (
+      <a href={searchUrl} target="_blank" rel="noopener noreferrer">
+        PDF in page
+      </a>
+    );
+  } else {
+    // Replace underscores with slashes and remove the file extension
+    adjustedSource = adjustedSource
+      .replace(/_/g, '/')
+      .slice(0, -4)
+
+    const finalUrl = 'https://www.electoralcommission.org.uk/' + adjustedSource;
+    return (
+      <a href={finalUrl} target="_blank" rel="noopener noreferrer">
+        {finalUrl}
+      </a>
+    );
+  }
 }
 
 export const MessageContainer: React.FC<{

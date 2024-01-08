@@ -5,42 +5,70 @@ import { pinecone } from '@/utils/pinecone-client';
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
 import { PINECONE_INDEX_NAME, PINECONE_NAME_SPACE } from '@/config/pinecone';
 import { DirectoryLoader } from 'langchain/document_loaders/fs/directory';
+import { TextLoader } from 'langchain/document_loaders/fs/text';
 
 /* Name of directory to retrieve your files from 
    Make sure to add your PDF files inside the 'docs' folder
 */
-const filePath = 'docs';
+
+const filePath = 'docs/2';
+const processedPath = 'processed_docs';
+const batchSize = 25;
 
 export const run = async () => {
   try {
-    /*load raw docs from the all files in the directory */
+    console.log('Starting data ingestion...');
     const directoryLoader = new DirectoryLoader(filePath, {
       '.pdf': (path) => new PDFLoader(path),
+      '.txt': (path) => new TextLoader(path),
     });
 
-    // const loader = new PDFLoader(filePath);
     const rawDocs = await directoryLoader.load();
+    console.log(`Loaded ${rawDocs.length} documents`);
 
-    /* Split text into chunks */
     const textSplitter = new RecursiveCharacterTextSplitter({
       chunkSize: 1000,
       chunkOverlap: 200,
     });
 
-    const docs = await textSplitter.splitDocuments(rawDocs);
-    console.log('split docs', docs);
-
     console.log('creating vector store...');
-    /*create and store the embeddings in the vectorStore*/
     const embeddings = new OpenAIEmbeddings();
-    const index = pinecone.Index(PINECONE_INDEX_NAME); //change to your own index name
+    const index = pinecone.Index(PINECONE_INDEX_NAME);
 
-    //embed the PDF documents
-    await PineconeStore.fromDocuments(docs, embeddings, {
-      pineconeIndex: index,
-      namespace: PINECONE_NAME_SPACE,
-      textKey: 'text',
-    });
+    for (let i = 0; i < rawDocs.length; i += batchSize) {
+      const batch = rawDocs.slice(i, i + batchSize);
+      const docs = await textSplitter.splitDocuments(batch);
+      console.log(`Split batch ${i / batchSize + 1} into ${docs.length} chunks`);
+
+      if (batch.length > 0 && batch[0].metadata && batch[0].metadata['source']) {
+        console.log(`Batch ${i / batchSize + 1} source: ${batch[0].metadata['source']}`);
+      }
+
+      await PineconeStore.fromDocuments(docs, embeddings, {
+        pineconeIndex: index,
+        namespace: PINECONE_NAME_SPACE,
+        textKey: 'text',
+      });
+      console.log(`Batch ${i / batchSize + 1} vectorized and stored`);
+    }
+    
+
+    // const docs = await textSplitter.splitDocuments(rawDocs);
+    // console.log(`Split documents into ${docs.length} chunks`);
+    
+    // console.log('split docs', docs);
+
+    // console.log('creating vector store...');
+    // /*create and store the embeddings in the vectorStore*/
+    // const embeddings = new OpenAIEmbeddings();
+    // const index = pinecone.Index(PINECONE_INDEX_NAME); //change to your own index name
+
+    // //embed the PDF documents
+    // await PineconeStore.fromDocuments(docs, embeddings, {
+    //   pineconeIndex: index,
+    //   namespace: PINECONE_NAME_SPACE,
+    //   textKey: 'text',
+    // });
   } catch (error) {
     console.log('error', error);
     throw new Error('Failed to ingest your data');
