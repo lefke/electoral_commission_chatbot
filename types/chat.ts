@@ -5,6 +5,7 @@ export type Message = {
   message: string;
   isStreaming?: boolean;
   sourceDocs?: Document[];
+  suggestions?: string[];
 };
 
 export type MessageState = {
