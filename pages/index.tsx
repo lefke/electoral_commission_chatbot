@@ -47,7 +47,8 @@ export default function Home() {
     setconversationId(newconversationId);
   }, []);
 
-  async function handleQuerySubmit() {
+  async function handleQuerySubmit(e: any) {
+    e.preventDefault();
     setError(null);
 
     if (!query) {

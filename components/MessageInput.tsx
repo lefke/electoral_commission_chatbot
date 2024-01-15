@@ -8,7 +8,7 @@ export const MessageInput: React.FC<{
   query?: string;
   setQuery: (query: string) => void;
   error: string | null;
-  handleQuerySubmit: () => void;
+  handleQuerySubmit: (e: any) => void;
 }> = ({ loading, query, setQuery, error, handleQuerySubmit }) => {
   //handle form submission
 
@@ -21,8 +21,7 @@ export const MessageInput: React.FC<{
   //prevent empty submissions
   const handleEnter = (e: any) => {
     if (e.key === 'Enter' && query) {
-      e.preventDefault();
-      handleQuerySubmit();
+      handleQuerySubmit(e);
     } else if (e.key == 'Enter') {
       e.preventDefault();
     }
