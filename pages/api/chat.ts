@@ -21,10 +21,6 @@ export default async function handler(
     }
   });
 
-  // console.log('question', question);
-  // console.log('history', history);
-  // console.log('id', conversationId);
-
   //only accept post requests
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' });

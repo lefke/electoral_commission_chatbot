@@ -190,7 +190,7 @@ const SourceAccordion: React.FC<{
               accordionEndRef.current?.scrollIntoView({ behavior: 'smooth' })
             }
           >
-            <h3>Sources</h3>
+            <h3>Click For Sources</h3>
           </AccordionTrigger>
           <AccordionContent className="container">
             <>
