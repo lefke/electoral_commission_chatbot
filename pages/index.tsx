@@ -6,7 +6,7 @@ import { MessageContainer } from '@/components/MessageContainer';
 
 const initMessages = (): Message[] => [
   {
-    message: `Hi! I'm a chatbot for the Electoral Commission website. I find information and sources directly from the site to make your life easier!\n
+    message: `Hi! I find information and sources directly from the the Electoral Commission website to make your life easier!\n
     \u00A0\n
 ![A meme where AI is being used to do a job better](/work-working.gif)`,
     type: 'apiMessage',
