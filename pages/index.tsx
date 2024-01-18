@@ -7,14 +7,14 @@ import { generateUUID, handleApiRequest } from '@/components/util';
 
 const initMessages = (): Message[] => [
   {
-    message: `Hi! I'm the (unofficial) Electoral Commission chatbot, I help you find information and sources related to the UK Electoral Commission to make your life easier!\n
+    message: `Hi! I find information and sources directly from the the Electoral Commission website to make your life easier!\n
     \u00A0\n
 ![A meme where AI is being used to do a job better](/work-working.gif)`,
     type: 'apiMessage',
   },
   {
-    message: `Ask me a question or give me a prompt! 
-I index everything published by the Electoral Commission, so you can be as specific as you like.\n
+    message: `Ask me a question or give me a prompt.
+I index everything on the Electoral Commission website, so you can be as specific as you like.\n
 \u00A0\n
 Here are some suggestions:  \n`,
     type: 'apiMessage',

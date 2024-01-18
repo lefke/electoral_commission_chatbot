@@ -11,7 +11,7 @@ import { TextLoader } from 'langchain/document_loaders/fs/text';
    Make sure to add your PDF files inside the 'docs' folder
 */
 
-const filePath = 'docs/2';
+const filePath = 'docs/extra';
 const processedPath = 'processed_docs';
 const batchSize = 25;
 

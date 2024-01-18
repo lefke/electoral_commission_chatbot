@@ -67,7 +67,7 @@ export default function LoadingModal() {
                     />
                   </div>
                   <h2 className="px-6 pb-3">
-                    Ask the (unofficial) chat bot to do the searching for you
+                    Use our chatbot to do the searching for you
                   </h2>
                   <div className="bg-white p-6 pb-3">
                     <h3 className=" text-gray-500">Information</h3>
