@@ -20,29 +20,10 @@ export const MessageContainer: React.FC<{
   messageState: MessageState;
   onSuggestionClick: (suggestion: string) => void;
 }> = ({ loading, messageState, onSuggestionClick }) => {
-// }> = ({ loading, messageState }) => {
+  // }> = ({ loading, messageState }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const { messages } = messageState;
-
-  const renderMessageWithSuggestions = (message: string) => {
-    // Split the message by lines to find suggestions
-    const lines = message.split('\n');
-    return lines.map((line, index) => {
-      if (line.startsWith('👉 ')) {
-        // It's a suggestion, make it clickable
-        const suggestion = line.substring(3); // Remove the '👉 ' part
-        return (
-          <div key={index} className="suggestion" onClick={() => onSuggestionClick(suggestion)}>
-            {line}
-          </div>
-        );
-      } else {
-        // It's not a suggestion, just display it
-        return <div key={index}>{line}</div>;
-      }
-    });
-  };
 
   useEffect(
     () => messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }),
@@ -56,6 +37,7 @@ export const MessageContainer: React.FC<{
           <MessageLine
             message={message}
             loading={loading && index === messages.length - 1}
+            onSuggestionClick={onSuggestionClick}
           />
           {message.sourceDocs && message.sourceDocs.length > 0 && (
             <SourceAccordion sourceDocs={message.sourceDocs} msgIdx={index} />
@@ -70,7 +52,8 @@ export const MessageContainer: React.FC<{
 const MessageLine: React.FC<{
   message: Message;
   loading: boolean;
-}> = ({ message, loading }) => {
+  onSuggestionClick: (suggestion: string) => void;
+}> = ({ message, loading, onSuggestionClick }) => {
   const msgClass = `p-6 flex ${
     message.type === 'apiMessage' ? 'bg-ec-blue-50' : loading ? '' : 'bg-white'
   }`;
@@ -89,13 +72,25 @@ const MessageLine: React.FC<{
         )}
         <div className={styles.markdownanswer + ''}>
           <ReactMarkdown linkTarget="_blank">{message.message}</ReactMarkdown>
+          {message.suggestions && (
+            <ul className="list-none">
+              {message.suggestions.map((suggestion) => (
+                <li
+                  className="list-none hover:cursor-pointer hover:underline"
+                  onClick={() => onSuggestionClick(suggestion)}
+                >{`👉 ${suggestion}`}</li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </div>
   );
 };
 
-function getUniqueSourceDocs(sourceDocs: Document<Record<string, any>>[]): Document<Record<string, any>>[] {
+function getUniqueSourceDocs(
+  sourceDocs: Document<Record<string, any>>[],
+): Document<Record<string, any>>[] {
   const uniqueDocs = new Map<string, Document<Record<string, any>>>();
 
   sourceDocs.forEach((doc) => {
@@ -120,7 +115,8 @@ function formatSource(source: string): JSX.Element {
     .replace(/(1\/|2\/|Big\/)/g, '');
 
   // Check if the source string ends with '.pdf'
-  const isPdf = adjustedSource.includes('sites_default') || adjustedSource.endsWith('.pdf');
+  const isPdf =
+    adjustedSource.includes('sites_default') || adjustedSource.endsWith('.pdf');
   if (isPdf) {
     // Extract the filename without the extension and directory prefix
     const filename = adjustedSource
@@ -131,19 +127,27 @@ function formatSource(source: string): JSX.Element {
     // Create the search query URL
     const searchUrl = `https://www.electoralcommission.org.uk/search?search=${filename}`;
     return (
-      <a href={searchUrl} target="_blank" rel="noopener noreferrer" className="source-link">
+      <a
+        href={searchUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="source-link"
+      >
         Search the Website for this PDF
       </a>
     );
   } else {
     // Replace underscores with slashes and remove the file extension
-    adjustedSource = adjustedSource
-      .replace(/_/g, '/')
-      .slice(0, -4)
+    adjustedSource = adjustedSource.replace(/_/g, '/').slice(0, -4);
 
     const finalUrl = 'https://www.electoralcommission.org.uk/' + adjustedSource;
     return (
-      <a href={finalUrl} target="_blank" rel="noopener noreferrer" className="source-link">
+      <a
+        href={finalUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="source-link"
+      >
         {finalUrl}
       </a>
     );
