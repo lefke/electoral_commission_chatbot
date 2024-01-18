@@ -59,6 +59,7 @@ export const MessageInput: React.FC<{
             type="submit"
             disabled={loading}
             className="bottom-5 right-4 text-neutral-400 bg-none p-1.5 border-none absolute "
+            aria-label="Send message"
           >
             {loading ? (
               <div

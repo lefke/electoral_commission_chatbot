@@ -75,10 +75,11 @@ const MessageLine: React.FC<{
           </ReactMarkdown>
           {message.suggestions && (
             <ul className="list-none">
-              {message.suggestions.map((suggestion) => (
+              {message.suggestions.map((suggestion, i) => (
                 <li
                   className="list-none hover:cursor-pointer hover:underline"
                   onClick={() => onSuggestionClick(suggestion)}
+                  key={`suggestion-${i}`}
                 >{`👉 ${suggestion}`}</li>
               ))}
             </ul>
