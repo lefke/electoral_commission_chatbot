@@ -13,15 +13,15 @@ const initMessages = (): Message[] => [
     type: 'apiMessage',
   },
   {
-    message: `Ask me a question or give me a prompt.
-I index everything on the Electoral Commission website, so you can be as specific as you like.\n
-\u00A0\n
+    message: `Ask me a question! \n
+I index everything on the Electoral Commission website. That's a lot of overlapping information, so it helps if you're specific.
+\n
 Here are some suggestions:  \n`,
     type: 'apiMessage',
     suggestions: [
       "Do I need to register if I'm a charity distributing leaflets during an election?",
-      "How much can I spend as a candidate during the regulated period for the police and crime commissioner election in North Wales?",
       'Can you explain the different voting systems used in UK elections and referendums?',
+      "How much can I spend as a candidate during the regulated period for the police and crime commissioner election in North Wales?"
     ],
   },
 ];
