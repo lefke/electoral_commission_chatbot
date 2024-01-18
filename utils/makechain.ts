@@ -2,21 +2,18 @@ import { ChatOpenAI } from 'langchain/chat_models/openai';
 import { PineconeStore } from 'langchain/vectorstores/pinecone';
 import { ConversationalRetrievalQAChain } from 'langchain/chains';
 
-const CONDENSE_TEMPLATE = `
+const CONDENSE_TEMPLATE = `Given the following conversation and a follow up question, rephrase the follow up question to be a standalone question.
+
 Chat History:
 {chat_history}
 Follow Up Input: {question}
-
-Provide a single standalone question using the chat history and follow up input.
-
 Standalone question:`;
 
 const QA_TEMPLATE = `{context}
 
-You're a helpful and charismatic AI assistant, excited to be providing advice from the electoral commission on legal duties and political finance regulations on UK elections. Use the context to answer the question at the end.
-If the context doesn't provide an answer, say you don't know and provide examples of more relevant questions.
-If the question is not related to the documents provided, suggest more relevant questions they could ask instead.
-Use British English spelling.
+You're a helpful AI assistant representing the UK electoral commission. You provide clear and concise legal and financial advice on UK elections. 
+Use the context to answer the question at the end. Use British English spelling.
+If the question is not related to the documents provided, suggest more relevant questions.
 
 Question: {question}`;
 

@@ -20,8 +20,8 @@ Here are some suggestions:  \n`,
     type: 'apiMessage',
     suggestions: [
       "Do I need to register if I'm a charity distributing leaflets during an election?",
-      "What's the typical budget for a Police and Crime Commissioner campaign in Manchester?",
-      'Provide a structured response indicating the spending limits for political parties at each stage in the election',
+      "What was the budget for the Nottinghamshire Police and Crime Commissioner campaign in 2021?",
+      'What are the spending limits for political parties at each stage in the general election campaign?',
     ],
   },
 ];
