@@ -20,7 +20,7 @@ Here are some suggestions:  \n`,
     type: 'apiMessage',
     suggestions: [
       "Do I need to register if I'm a charity distributing leaflets during an election?",
-      "What was the spending limit for the Nottinghamshire Police and Crime Commissioner campaign in 2021?",
+      "How much can I spend as a candidate during the regulated period for the police and crime commissioner election in North Wales?",
       'Can you explain the different voting systems used in UK elections and referendums?',
     ],
   },
