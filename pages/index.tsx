@@ -21,7 +21,7 @@ Here are some suggestions:  \n`,
     suggestions: [
       "Do I need to register if I'm a charity distributing leaflets during an election?",
       'Can you explain the different voting systems used in UK elections and referendums?',
-      "How much can I spend as a candidate during the regulated period for the police and crime commissioner election in North Wales?"
+      "How much can a candidate spend during the regulated period for the police and crime commissioner election in North Wales?"
     ],
   },
 ];
