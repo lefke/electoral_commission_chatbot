@@ -70,7 +70,9 @@ const MessageLine: React.FC<{
           <UserCircleIcon className="shrink-0 h-[24px] w-[24px] text-slate-800 mr-3" />
         )}
         <div className={styles.markdownanswer + ''}>
-          <ReactMarkdown linkTarget="_blank">{message.message}</ReactMarkdown>
+          <ReactMarkdown linkTarget="_blank" className="flex flex-col gap-4">
+            {message.message}
+          </ReactMarkdown>
           {message.suggestions && (
             <ul className="list-none">
               {message.suggestions.map((suggestion) => (
