@@ -12,8 +12,8 @@ const initMessages = (): Message[] => [
     type: 'apiMessage',
   },
   {
-    message: `Ask me a question or give me a prompt! 
-I index everything published by the Electoral Commission, so you can be as specific as you like.\n
+    message: `Ask me a question or give me a prompt.
+I index everything on the Electoral Commission website, so you can be as specific as you like.\n
 \u00A0\n
 Here are some suggestions:  \n
 \u00A0\n
