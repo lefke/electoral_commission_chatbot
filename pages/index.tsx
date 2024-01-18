@@ -89,11 +89,6 @@ export default function Home() {
         messages: [
           ...prevState.messages,
           {
-            type: 'userMessage',
-            message: question,
-            sourceDocs: [],
-          },
-          {
             type: 'apiMessage',
             message,
             sourceDocs,

@@ -20,7 +20,6 @@ export const MessageContainer: React.FC<{
   messageState: MessageState;
   onSuggestionClick: (suggestion: string) => void;
 }> = ({ loading, messageState, onSuggestionClick }) => {
-  // }> = ({ loading, messageState }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const { messages } = messageState;
