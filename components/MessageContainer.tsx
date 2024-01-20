@@ -123,6 +123,7 @@ function formatSource(source: string): JSX.Element {
     // Extract the filename without the extension and directory prefix
     const filename = adjustedSource
       .replace('sites_default_files_', '')
+      .replace('pdf_file_', '')
       .slice(0, -4) // Remove the '.pdf'
       .replace(/-/g, '+'); // Replace '-' with '+'
 

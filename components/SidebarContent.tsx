@@ -4,9 +4,17 @@ import { Disclaimers } from './ui/Disclaimers';
 export const SidebarContent: React.FC = () => (
   <div className="flex flex-col h-full justify-between">
     <Title dark />
-    <div>
+    <div className="mt-auto">
       <h3 className="pt-3 text-white">Disclaimer</h3>
       <Disclaimers dark />
+      <div>
+        <h3 className="pt-3 text-white">Any problems or bugs?</h3>
+        <p className="text-white italic text-xs">
+          <a href="mailto:campaigntesting@campaignlab.uk" className="hover:text-gray-300 underline">
+          Let us know
+          </a> 😊
+        </p>
+      </div>
     </div>
   </div>
 );
