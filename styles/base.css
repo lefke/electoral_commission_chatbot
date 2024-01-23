@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+#__next {
+  display: flex;
+}
+
 .container {
   @apply w-full max-w-[60rem] mx-auto;
 }
