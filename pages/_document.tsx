@@ -4,8 +4,8 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <title>Electoral Commission Chatbot</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {/* <title>Electoral Commission Chatbot</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" /> */}
       </Head>
       <body>
         <Main />

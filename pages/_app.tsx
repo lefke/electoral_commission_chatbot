@@ -1,6 +1,6 @@
 import '@/styles/base.css';
 import type { AppProps } from 'next/app';
-import { Inter } from 'next/font/google';
+import Head from 'next/head';
 
 // const inter = Inter({
 //   variable: '--font-inter',
@@ -9,11 +9,12 @@ import { Inter } from 'next/font/google';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    // <>
-    //   <main className={inter.variable}>
-    <Component {...pageProps} />
-    //   </main>
-    // </>
+    <>
+      <Head>
+        <title>Electoral Comission Chatbot</title>
+      </Head>
+      <Component {...pageProps} />
+    </>
   );
 }
 
