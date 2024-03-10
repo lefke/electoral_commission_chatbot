@@ -64,5 +64,3 @@ yarn dev
 ```
 Soon
 ```
-
-### - **I'm thinking of rebuilding the UI very soon, so keep an eye out! 👀**
