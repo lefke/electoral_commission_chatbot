@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styles from '@/styles/Home.module.css';
 import LoadingDots from './ui/LoadingDots';
-// import axios from 'axios';
 
 export const MessageInput: React.FC<{
   loading: boolean;

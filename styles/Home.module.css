@@ -5,6 +5,7 @@
   border: 1px solid #d9d9e3;
   background: #ffffff;
   outline: none;
+  color: black;
 }
 
 .textarea:disabled {

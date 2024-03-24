@@ -7,14 +7,14 @@ import { generateUUID, handleApiRequest } from '@/components/util';
 
 const initMessages = (): Message[] => [
   {
-    message: `Hi! I find information and sources directly from the Electoral Commission website to make your life easier!\n
+    message: `Hi 👋 I find the information on electoral regulations, and provide sources on the Electoral Commission website \n
     \u00A0\n
 ![A meme where AI is being used to do a job better](/work-working.gif)`,
     type: 'apiMessage',
   },
   {
-    message: `Ask me a question! \n
-I index everything on the Electoral Commission website. That's a lot of overlapping information, so it helps if you're specific.
+    message: `Ask me any question - I index everything on the Electoral Commission website \n
+That's a lot of overlapping information on here, so it helps if you're specific.
 \n
 Here are some suggestions:  \n`,
     type: 'apiMessage',

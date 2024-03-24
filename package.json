@@ -33,7 +33,6 @@
     "clsx": "^1.2.1",
     "csv-parser": "^3.0.0",
     "csv-writer": "^1.6.0",
-    "django": "^1.0.0",
     "django-express": "^1.0.0",
     "dotenv": "^16.0.3",
     "eslint": "8.35.0",

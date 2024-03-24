@@ -70,19 +70,20 @@ const MessageLine: React.FC<{
           <UserCircleIcon className="shrink-0 h-[24px] w-[24px] text-slate-800 mr-3" />
         )}
         <div className={styles.markdownanswer + ''}>
-          <ReactMarkdown linkTarget="_blank" className="flex flex-col gap-4">
+          <ReactMarkdown linkTarget="_blank" className="flex flex-col gap-4 text-black">
             {message.message}
           </ReactMarkdown>
           {message.suggestions && (
             <ul className="list-none">
-              {message.suggestions.map((suggestion, i) => (
-                <li
-                  className="list-none hover:cursor-pointer hover:underline"
-                  onClick={() => onSuggestionClick(suggestion)}
-                  key={`suggestion-${i}`}
-                >{`👉 ${suggestion}`}</li>
-              ))}
-            </ul>
+            {message.suggestions.map((suggestion, i) => (
+              <li
+                className="list-none hover:cursor-pointer hover:underline"
+                onClick={() => onSuggestionClick(suggestion)}
+                key={`suggestion-${i}`}
+                style={{ color: 'black', fontWeight: 'bold' }}
+              >{`👉 ${suggestion}`}</li>
+            ))}
+          </ul>
           )}
         </div>
       </div>
