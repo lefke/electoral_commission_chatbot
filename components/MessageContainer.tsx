@@ -187,7 +187,7 @@ const SourceAccordion: React.FC<{
   const uniqueSourceDocs = sourceDocs ? getUniqueSourceDocs(sourceDocs) : [];
 
   return (
-    <div className="" key={`sourceDocsAccordion-${msgIdx}`}>
+    <div className="text-black" key={`sourceDocsAccordion-${msgIdx}`}>
       <Accordion
         type="single"
         collapsible
