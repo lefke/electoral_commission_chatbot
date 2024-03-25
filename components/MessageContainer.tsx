@@ -97,9 +97,12 @@ function getUniqueSourceDocs(
   const uniqueDocs = new Map<string, Document<Record<string, any>>>();
 
   sourceDocs.forEach((doc) => {
-    const normalizedContent = doc.pageContent.toLowerCase(); // Normalize to lower case for comparison
-    if (!uniqueDocs.has(normalizedContent)) {
-      uniqueDocs.set(normalizedContent, doc);
+    // Check if pageContent exists and is not undefined before proceeding
+    if (doc.pageContent) {
+      const normalizedContent = doc.pageContent.toLowerCase(); // Normalize to lower case for comparison
+      if (!uniqueDocs.has(normalizedContent)) {
+        uniqueDocs.set(normalizedContent, doc);
+      }
     }
   });
 
@@ -107,7 +110,21 @@ function getUniqueSourceDocs(
 }
 
 //Adjust the source back to URL format and handle PDFs
-function formatSource(source: string): JSX.Element {
+function formatSource(source: string, url?: string): JSX.Element {
+  if (url) {
+    // If url is provided, use it directly
+    return (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="source-link"
+      >
+        {url}
+      </a>
+    );
+  }
+
   if (typeof source !== 'string') {
     return <span>Source not available</span>;
   }
@@ -186,6 +203,12 @@ const SourceAccordion: React.FC<{
 
   const uniqueSourceDocs = sourceDocs ? getUniqueSourceDocs(sourceDocs) : [];
 
+  // uniqueSourceDocs.forEach((doc) => {
+  //   console.log('Metadata:', doc.metadata);
+  //   console.log('Source:', doc.metadata.source);
+  //   console.log('URL:', doc.metadata.url);
+  // });
+
   return (
     <div className="text-black" key={`sourceDocsAccordion-${msgIdx}`}>
       <Accordion
@@ -211,7 +234,7 @@ const SourceAccordion: React.FC<{
                       {formatDocumentContent(doc.pageContent)}
                     </ReactMarkdown>
                     <p className="italic">
-                      <b>Source:</b> {formatSource(doc.metadata.source)}
+                      <b>Source:</b> {formatSource(doc.metadata.source, doc.metadata.url)}
                     </p>
                   </li>
                 ))}

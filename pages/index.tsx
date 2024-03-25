@@ -7,14 +7,14 @@ import { generateUUID, handleApiRequest } from '@/components/util';
 
 const initMessages = (): Message[] => [
   {
-    message: `Hi 👋 I find the information on electoral regulations, and provide sources on the Electoral Commission website \n
+    message: `Hi 👋 I find the information on electoral regulations, and provide sources which link to the Electoral Commission website. Remember - what I say isn't legal advice. Check the sources before acting on the information I provide. \n
     \u00A0\n
 ![A meme where AI is being used to do a job better](/work-working.gif)`,
     type: 'apiMessage',
   },
   {
     message: `Ask me any question - I index everything on the Electoral Commission website \n
-That's a lot of overlapping information on here, so it helps if you're specific.
+That's a lot of overlapping information on here, so it helps if you're specific. In particular, make it clear whether you're asking about national or local elections. Also let me know which part of the UK you're talking about - England, Scotland, Wales, or Northern Ireland - as the advice may differ. 
 \n
 Here are some suggestions:  \n`,
     type: 'apiMessage',

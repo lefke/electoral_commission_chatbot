@@ -65,32 +65,9 @@ export default async function handler(
 
     console.log('sanitizedQuestion:', sanitizedQuestion);
 
+    console.log('response', JSON.stringify(response, null, 2)); // Optionally, log the entire response in a readable format
+
     const updatedHistory = [...history, question, response.text];
-
-    // const DATABASE_URL_0 = process.env.DATABASE_URL || 'http://127.0.0.1:8000/api/chat/';
-
-    // const djangoRes = await axios.post(DATABASE_URL_0, {
-    //   // const djangoRes = await axios.post('http://127.0.0.1:8000/api/chat/', {
-    //     history: updatedHistory,
-    //     response: response,
-    //     conversationId: conversationId,
-    //   });
-  
-    // // Sample Id
-    //   // c427ab169725fd06d5ecff1d91d78b6c9fc56003ae71a62cd9b54a0190dcb6a5
-  
-    //   if (djangoRes.status !== 200) {
-    //     console.error('Failed to store chat history in Django', djangoRes.data);
-    //   }
-
-    // const result = await pool.query(
-    //   'INSERT INTO chatapp_chatmessage (history, response, "conversationId", "timestamp") VALUES ($1, $2, $3, NOW())',
-    //   [JSON.stringify(updatedHistory), JSON.stringify(response), conversationId]
-    // );
-  
-    // if (result.rowCount === 0) {
-    //   console.error('Failed to store chat history in PostgreSQL');
-    // }
   
     console.log('response', response);
     res.status(200).json(response);
