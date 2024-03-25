@@ -8,7 +8,7 @@ import { TextLoader } from 'langchain/document_loaders/fs/text';
 import { DirectoryLoader } from 'langchain/document_loaders/fs/directory';
 import { PINECONE_INDEX_NAME, PINECONE_NAME_SPACE } from '@/config/pinecone';
 
-const filePath = 'scripts/scraped_txt';
+const filePath = 'scripts/data/scraped_txt';
 
 // Simplified Document interface based on LangChain documentation
 interface SimpleDocument {
@@ -84,7 +84,9 @@ export const run = async () => {
 
     console.log('split docs', docs);
 
-    const embeddings = new OpenAIEmbeddings();
+    const embeddings = new OpenAIEmbeddings({
+      modelName: "text-embedding-3-large",
+    });
     const index = pinecone.Index(PINECONE_INDEX_NAME);
 
     await PineconeStore.fromDocuments(docs, embeddings, {

@@ -8,7 +8,7 @@ import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
 import { PINECONE_INDEX_NAME, PINECONE_NAME_SPACE } from '@/config/pinecone';
 import { DirectoryLoader } from 'langchain/document_loaders/fs/directory';
 
-const filePath = 'scripts/scraped_pdfs';
+const filePath = 'scripts/data/scraped_pdfs';
 
 interface SimpleDocument {
   pageContent: string;
@@ -89,7 +89,9 @@ export const run = async () => {
     console.log('Invalid PDF filenames written to invalid_pdfs.txt');
 
     console.log('Preparing to upsert documents with embeddings...');
-    const embeddings = new OpenAIEmbeddings();
+    const embeddings = new OpenAIEmbeddings({
+        modelName: "text-embedding-3-large",
+      });
     const index = pinecone.Index(PINECONE_INDEX_NAME);
 
     await PineconeStore.fromDocuments(docs, embeddings, {

@@ -69,7 +69,7 @@ export default async function handler(
 
     const updatedHistory = [...history, question, response.text];
   
-    console.log('response', response);
+    // console.log('response', response);
     res.status(200).json(response);
   } catch (error: any) {
     console.log('error', error);

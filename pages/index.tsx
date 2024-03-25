@@ -8,7 +8,6 @@ import { generateUUID, handleApiRequest } from '@/components/util';
 const initMessages = (): Message[] => [
   {
     message: `Hi 👋 I find the information on electoral regulations, and provide sources which link to the Electoral Commission website. Remember - what I say isn't legal advice. Check the sources before acting on the information I provide. \n
-    \u00A0\n
 ![A meme where AI is being used to do a job better](/work-working.gif)`,
     type: 'apiMessage',
   },
