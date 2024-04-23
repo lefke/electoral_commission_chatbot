@@ -1,0 +1,114 @@
+.textarea {
+  resize: none;
+  padding: 1rem 2.2rem 1rem 2rem;
+  border-radius: 3rem;
+  border: 1px solid #d9d9e3;
+  background: #ffffff;
+  outline: none;
+  color: black;
+}
+
+.textarea:disabled {
+  opacity: 0.5;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: #6b7280;
+  box-shadow: 0 0 0 3px rgba(156, 163, 175, 0.5);
+}
+
+.textarea::placeholder {
+  color: #6b7280;
+}
+
+.svgicon {
+  transform: rotate(90deg);
+  width: 1.2em;
+  height: 1.2em;
+  fill: currentColor;
+}
+
+.generatebutton:hover {
+  background: #e4575726;
+  border-radius: 0.2rem;
+}
+
+.generatebutton:disabled {
+  opacity: 0.9;
+  cursor: not-allowed;
+  background: none;
+}
+
+.messagelistloading {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.usermessagewaiting {
+  color: #000;
+  background-color: white;
+  box-shadow: inset 10px 0 5px -10px white;
+  background: linear-gradient(to left, #7f7f7f24, white, #7f7f7f24);
+  background-size: 200% 200%;
+  background-position: -100% 0;
+  animation: loading-gradient 1.5s ease-in-out infinite;
+  animation-direction: left;
+  animation-name: loading-gradient;
+}
+
+@keyframes loading-gradient {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+.apimessage {
+  animation: fadein 0.5s;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.markdownanswer a:hover {
+  opacity: 0.8;
+}
+
+.markdownanswer a {
+  text-decoration: underline;
+}
+
+.markdownanswer img {
+  max-width: 260px;
+  width: 60%;
+  height: auto;
+}
+
+.markdownanswer code {
+  color: #15cb19;
+  font-weight: 500;
+  white-space: pre-wrap !important;
+}
+
+.markdownanswer ol,
+.markdownanswer ul {
+  margin: 1rem;
+  list-style: disc;
+}
+
+.markdownanswer h1,
+.markdownanswer h2,
+.markdownanswer h3 {
+  font-size: inherit;
+}
